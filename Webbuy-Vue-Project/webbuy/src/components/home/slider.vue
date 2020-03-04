@@ -17,16 +17,16 @@
       <b-carousel-slide
         caption="First slide"
         text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"
+        img-src="https://www.citystyle.bg/sites/default/files/styles/uc_product_full/public/12001826_xxl.jpg?itok=Uxria6Cq"
       ></b-carousel-slide>
 
       <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+      <b-carousel-slide  img-src="https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/5f07247483a94810a216aa06016a4266_9366/Harden_Vol._4_Shoes_White_EF1260_01_standard.jpg">
         <h1>Hello world!</h1>
       </b-carousel-slide>
 
       <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+      <b-carousel-slide img-src="https://fscl01.fonpit.de/userfiles/7613938/image/Sp19_BB_Nike_Adapt_20181218_NIKE0538_Detail5_rectangle_1600.jpg"></b-carousel-slide>
 
       <!-- Slides with img slot -->
       <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->

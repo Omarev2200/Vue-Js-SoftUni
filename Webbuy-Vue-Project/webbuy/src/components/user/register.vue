@@ -40,12 +40,20 @@
                   id="re-password"
                   class="form-control"
                   placeholder="***********"
-                  :rules='comparePassword'
                   required
                 />
               </div>
               <br />
-              <button class="btn btn-lg btn-primary btn-block text-uppercase">Register</button>
+              <button  class="btn btn-lg btn-primary btn-block text-uppercase " >
+               <span v-if="!loading">Register</span>
+                
+              <div v-else >
+                Loading...
+                <div class="spinner-border text-wait">
+
+                </div>
+               </div>
+            </button>
             </form>
           </div>
         </div>
@@ -55,7 +63,7 @@
 </template>
 
 <script >
-import firebase from 'firebase';
+
 export default {
   data() {
     return {
@@ -66,24 +74,26 @@ export default {
   },
 
   computed: {
-      comparePassword() {
-          return this.password!==this.confirmPassword ? 'Password do not match !' : '';
+      user () {
+        return this.$store.getters.user;
+      },
+
+      loading () {
+        return this.$store.getters.loading;
+      },
+  },
+
+  watch:{
+    user (value) {
+      if(value !==null && value !== undefined) {
+        this.$router.push('/')
       }
+    }
   },
 
   methods: {
       register() {
-         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-         .then((user) => {
-             console.log(user);
-             this.$router.push('/login')
-             alert('Your account has been created !')
-         },
-         (err) =>{
-            alert('Oops. '+ err.message)
-         }
-         )
-          
+         this.$store.dispatch('registerUser', {email:this.email, password:this.password})
       }
   }
 };

@@ -2,6 +2,8 @@
   <div id="app">
   <Navigation/>
   <router-view/>
+  <notifications group="auth" position="top right"/>
+  
   <Footer/>
   </div>
 </template>
