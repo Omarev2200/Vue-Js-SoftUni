@@ -5,6 +5,7 @@ import Login from '../components/user/login';
 import Register from '../components/user/register';
 import Profile from '../components/user/profile';
 import AuthGuard from './auth-guard'
+import GuestGuard from './guest-guard'
 
 Vue.use(Router)
 
@@ -20,6 +21,7 @@ export default new Router ({
             path: '/login',
             name: 'Login',
             component: Login,
+            beforeEnter: GuestGuard
             
 
         },
@@ -27,7 +29,8 @@ export default new Router ({
         {
             path: '/register',
             name: 'Register',
-            component: Register
+            component: Register,
+            beforeEnter: GuestGuard
         },
 
         {
