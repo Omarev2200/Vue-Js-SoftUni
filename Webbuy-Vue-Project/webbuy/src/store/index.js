@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
     state: {
         user: null,
         loading: false,
-        error: null
+        error: null,
+        loadProduct: []
     },
 
     mutations: {
@@ -25,6 +26,9 @@ export const store = new Vuex.Store({
         },
         clearError(state) {
             state.error = null;
+        },
+        createProduct(state, payload) {
+            state.loadProduct.push(payload)
         }
     },
 
@@ -68,6 +72,8 @@ export const store = new Vuex.Store({
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(
                     data => {
+                        console.log(data);
+                        
                         commit('setLoading', false)
                         Vue.notify({
                             group: 'auth',
@@ -100,13 +106,37 @@ export const store = new Vuex.Store({
             commit('setUser', { id: payload.uid, userOrders: [] })
         },
 
-        logout({commit}) {
+        logout({ commit }) {
             firebase.auth().signOut()
             commit('setUser', null)
         },
 
         clearError({ commit }) {
             commit('clearError')
+        },
+
+        createProduct({ commit }, payload) {
+            const product = {
+                brand: payload.brand,
+                gender: payload.gender,
+                price: payload.price,
+                imigUrl: payload.imigUrl,
+                size: payload.size
+            }
+            firebase.firestore().collection('products').add(product)
+            .then((data) => {
+                console.log(data);
+                    
+                    const key = data.key
+                    commit('createProduct', {
+                        ...product,
+                        id: key
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+
+                })
         }
     },
 

@@ -9,9 +9,7 @@
 <script >
 export default {
   name: 'Footer',
-  props: {
   
-  }
 }
 </script>
 <style >

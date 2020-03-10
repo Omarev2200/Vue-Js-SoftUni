@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import Home from '../components/home/home';
 import Login from '../components/user/login';
 import Register from '../components/user/register';
 import Profile from '../components/user/profile';
+import CreateProduct from '../components/admin/create-product'
 import AuthGuard from './auth-guard'
 import GuestGuard from './guest-guard'
 
@@ -38,6 +40,12 @@ export default new Router ({
             name: 'Profile',
             component: Profile,
             beforeEnter:AuthGuard
-        }
+        },
+
+        {
+            path: '/create-product',
+            name: 'CreateProduct',
+            component: CreateProduct
+        },
     ]
 });
