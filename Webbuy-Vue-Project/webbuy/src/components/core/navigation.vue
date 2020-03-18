@@ -3,35 +3,40 @@
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
         <router-link class="navbar-brand" to="/">WEBBUY</router-link>
-        <router-link class="navbar-brand" to="/create-product">Create Product</router-link>
-        
+        <router-link class="navbar-brand" v-if="isAdmin === 'Admin'" to="/create-product">Create Product</router-link>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"></li>
             <li class="nav-item" v-if="isLogged">
               <router-link class="nav-link" to="/profile">
-              
+                <i class="material-icons">account_circle</i>
                 Profile
-                
               </router-link>
-              
             </li>
             <li class="nav-item" v-if="isLogged">
-              <a class="nav-link" href="#" @click="onLogout">Logout</a>
-              
+              <a class="nav-link" href="#" @click="onLogout">
+                Logout
+                <i class="material-icons">exit_to_app</i>
+              </a>
             </li>
             <li class="nav-item" v-if="!isLogged">
-              <router-link class="nav-link" to="/login">Login</router-link>
+              <router-link class="nav-link" to="/login">
+                <i class="material-icons">lock_open</i>
+                Login
+              </router-link>
             </li>
             <li class="nav-item" v-if="!isLogged">
-              <router-link class="nav-link" to="/register">Register</router-link>
+              <router-link class="nav-link" to="/register">
+                <i class="material-icons">sentiment_satisfied_alt</i>
+                Register
+              </router-link>
             </li>
-            <li class="nav-item">
-            <i class="large material-icons">local_grocery_store</i>
-            </li>
-            <li >
+            <li class="nav-item"></li>
+            <li>
               <router-link class="nav-link" to="/user/cart">
-                Cart<span>0</span>
+                <i class="large material-icons">local_grocery_store</i>
+                Cart
+                <span>0</span>
               </router-link>
             </li>
           </ul>
@@ -48,12 +53,19 @@ export default {
   computed: {
     isLogged() {
       return !!this.$store.getters.user;
+    },
+
+    isAdmin() {
+      if (!this.$store.getters.user) {
+        return;
+      }
+      return this.$store.getters.user.roles;
     }
   },
 
   methods: {
     onLogout() {
-      this.$store.dispatch('logout')
+      this.$store.dispatch("logout");
     }
   }
 };
@@ -61,12 +73,20 @@ export default {
 <style scoped >
 .navbar {
   background-color: aqua;
-  ;
+}
+a {
+  color: black;
 }
 
-.container .nav-link {
-  color: black;
-  
+.nav-item {
+  margin-right: 15px;
+}
+.nav-link {
+  display: flex;
+}
+
+.material-icons {
+  padding-bottom: 8px;
 }
 </style>
 

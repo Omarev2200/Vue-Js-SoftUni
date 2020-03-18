@@ -12,19 +12,20 @@
 import Navigation from './components/core/navigation';
 import Footer from './components/core/footer';
 
-
 export default {
   name: 'App',
   components: {
     Navigation,
-    Footer,
-    
+    Footer, 
   }
 };
 </script>
 
 <style>
-body {
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+#app {
   padding-top: 56px;
+  font-family: 'Oswald', sans-serif;
 }
 </style>

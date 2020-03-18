@@ -50,24 +50,24 @@
 export default {
   data() {
     return {
-      productData: {
-        brand: "",
-        price: "",
-        gender: "",
-        imigUrl: "",
-        size: ""
-      }
+      brand: "",
+      price: "",
+      gender: "",
+      imigUrl: "",
+      size: ""
     };
-  },
-
-  created() {
-    this.$store.dispatch("createProduct", this.productData);
-    this.$router.push("/");
   },
 
   methods: {
     onCreateProduct() {
-     return;
+      this.$store.dispatch("createProduct", {
+        brand: this.brand,
+        price: this.price,
+        gender: this.gender,
+        imigUrl: this.imigUrl,
+        size: this.size
+      });
+      this.$router.push("/");
     },
 
     gedValue(e) {

@@ -21,12 +21,16 @@
       ></b-carousel-slide>
 
       <!-- Slides with custom text -->
-      <b-carousel-slide  img-src="https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/5f07247483a94810a216aa06016a4266_9366/Harden_Vol._4_Shoes_White_EF1260_01_standard.jpg">
+      <b-carousel-slide
+        img-src="https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/5f07247483a94810a216aa06016a4266_9366/Harden_Vol._4_Shoes_White_EF1260_01_standard.jpg"
+      >
         <h1>Hello world!</h1>
       </b-carousel-slide>
 
       <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://fscl01.fonpit.de/userfiles/7613938/image/Sp19_BB_Nike_Adapt_20181218_NIKE0538_Detail5_rectangle_1600.jpg"></b-carousel-slide>
+      <b-carousel-slide
+        img-src="https://i.pinimg.com/originals/91/5e/d0/915ed0a5607be5b7dcf4558c6ab514b5.jpg"
+      ></b-carousel-slide>
 
       <!-- Slides with img slot -->
       <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
@@ -36,43 +40,39 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="https://picsum.photos/1024/480/?image=55"
+            src="https://www.galls.com/photos/styles/FX480_BKGY_1500_1.JPG"
             alt="image slot"
-          >
+          />
         </template>
       </b-carousel-slide>
 
       <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
+      <!-- <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
           a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
         </p>
-      </b-carousel-slide>
+      </b-carousel-slide> -->
     </b-carousel>
-
-    <p class="mt-4">
-     
-    </p>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Slider',
-    data() {
-      return {
-        slide: 0,
-        sliding: null
-      }
+export default {
+  name: "Slider",
+  data() {
+    return {
+      slide: 0,
+      sliding: null
+    };
+  },
+  methods: {
+    onSlideStart() {
+      this.sliding = true;
     },
-    methods: {
-      onSlideStart() {
-        this.sliding = true
-      },
-      onSlideEnd() {
-        this.sliding = false
-      }
+    onSlideEnd() {
+      this.sliding = false;
     }
   }
+};
 </script>

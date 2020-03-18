@@ -1,5 +1,5 @@
 <template>
-    <footer class="py-5 bg-dark">
+  <footer class="py-5 ">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Webbuy 2020</p>
     </div>
@@ -8,10 +8,11 @@
 </template>
 <script >
 export default {
-  name: 'Footer',
-  
-}
+  name: "Footer"
+};
 </script>
-<style >
-
+<style scoped>
+footer {
+  background-color: aqua;
+}
 </style>

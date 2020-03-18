@@ -8,6 +8,7 @@
             <form class="form-signin" @submit.prevent="register">
               <label for="inputEmail">Email address</label>
               <div class="form-label-group">
+                <i class="material-icons">email</i>
                 <input
                   type="email"
                   v-model="email"
@@ -20,6 +21,7 @@
 
               <label for="inputPassword">Password</label>
               <div class="form-label-group">
+                <i class="material-icons">lock</i>
                 <input
                   type="password"
                   v-model="password"
@@ -33,6 +35,7 @@
 
               <label for="inputPassword">Confirm Password</label>
               <div class="form-label-group">
+                 <i class="material-icons">lock</i>
                 <input
                   type="password"
                   v-model="confirmPassword"
@@ -44,16 +47,14 @@
                 />
               </div>
               <br />
-              <button  class="btn btn-lg btn-primary btn-block text-uppercase " >
-               <span v-if="!loading">Register</span>
-                
-              <div v-else >
-                Loading...
-                <div class="spinner-border text-wait">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase">
+                <span v-if="!loading">Register</span>
 
+                <div v-else>
+                  Loading...
+                  <div class="spinner-border text-wait"></div>
                 </div>
-               </div>
-            </button>
+              </button>
             </form>
           </div>
         </div>
@@ -63,7 +64,6 @@
 </template>
 
 <script >
-
 export default {
   data() {
     return {
@@ -74,30 +74,42 @@ export default {
   },
 
   computed: {
-      user () {
-        return this.$store.getters.user;
-      },
+    user() {
+      return this.$store.getters.user;
+    },
 
-      loading () {
-        return this.$store.getters.loading;
-      },
+    loading() {
+      return this.$store.getters.loading;
+    }
   },
-
-  watch:{
-    user (value) {
-      if(value !==null && value !== undefined) {
-        this.$router.push('/')
+  created() {},
+  watch: {
+    user(value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
       }
     }
   },
 
   methods: {
-      register() {
-         this.$store.dispatch('registerUser', {email:this.email, password:this.password})
-      }
+    register() {
+      this.$store.dispatch("registerUser", {
+        email: this.email,
+        password: this.password
+      });
+    }
   }
 };
 </script>
 
-<style >
+<style scoped>
+.form-label-group {
+  display: flex;
+}
+
+.material-icons {
+  padding-top: 8px;
+}
+
+
 </style>
