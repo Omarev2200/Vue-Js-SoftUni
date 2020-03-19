@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
     user: null,
     loading: false,
     error: null,
-    loadProducts: []
+    loadProducts: null
   },
 
   mutations: {
@@ -27,7 +27,7 @@ export const store = new Vuex.Store({
       state.error = null;
     },
     createProduct(state, payload) {
-      state.loadProducts.push(payload);
+      state.loadProducts = payload;
     }
   },
 
@@ -129,7 +129,7 @@ export const store = new Vuex.Store({
     clearError({ commit }) {
       commit("clearError");
     },
-    createProduct({ commit }, payload) {
+    createProduct({ commit },payload) {
       const product = {
         brand: payload.brand,
         gender: payload.gender,
@@ -137,7 +137,7 @@ export const store = new Vuex.Store({
         imigUrl: payload.imigUrl,
         size: payload.size
       };
-
+      console.log(product);
       fetch("http://localhost:9999/api/products", {
         method: "POST",
         headers: {
@@ -146,18 +146,22 @@ export const store = new Vuex.Store({
         },
         body: JSON.stringify(product),
         credentials: "include"
-      }).then(data => {
-        console.log(data);
-
+      }).then(() => {
+        
+        
         commit("createProduct", {
           ...product
         });
       });
     },
-    getProducts({ commit }) {
-      fetch(`http://localhost:9999/api/products/`)
+    getProducts({ commit },payload) {
+      fetch(`http://localhost:9999/api/products/${
+        payload ? `?limit=${payload}` : ""
+      }`)
         .then(res => res.json())
         .then(data => {
+          let test = data.filter(m => m.gender ==='MAN')
+          console.log(test);
           console.log(data);
           commit("createProduct", data);
         });
