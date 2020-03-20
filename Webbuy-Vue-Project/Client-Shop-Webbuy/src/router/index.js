@@ -6,6 +6,7 @@ import Login from '../components/user/login';
 import Register from '../components/user/register';
 import Profile from '../components/user/profile';
 import CreateProduct from '../components/admin/create-product'
+import ProductDetails from '../components/products/product-details'
 import NotFound from '../components/not-found/not-found'
 import AuthGuard from './auth-guard'
 import GuestGuard from './guest-guard'
@@ -47,6 +48,13 @@ export default new Router ({
             path: '/create-product',
             name: 'CreateProduct',
             component: CreateProduct,
+                
+        },
+
+        {
+            path: '/details-product/:id',
+            name: 'ProductDetails',
+            component: ProductDetails,
                 
         },
 
