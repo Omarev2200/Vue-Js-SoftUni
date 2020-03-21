@@ -4,7 +4,7 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
 import App from "./App.vue";
 import router from "./router";
-import { store } from "./store";
+import store from "./store";
 import Notifications from "vue-notification";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -19,7 +19,7 @@ Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
   store,
+  router,
   render: h => h(App)
 }).$mount("#app");

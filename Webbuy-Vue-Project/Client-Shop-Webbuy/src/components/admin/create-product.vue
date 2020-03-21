@@ -47,6 +47,8 @@
 </template>
 
 <script >
+// import { validationMixin } from 'vuelidate'
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -59,15 +61,22 @@ export default {
   },
 
   methods: {
+    ...mapActions(["createProduct"]),
     onCreateProduct() {
-      this.$store.dispatch("createProduct", {
+      this.createProduct({
         brand: this.brand,
         price: this.price,
         gender: this.gender,
         imigUrl: this.imigUrl,
         size: this.size
       });
-      this.$router.push("/");
+      // this.$store.dispatch("createProduct", {
+      //   brand: this.brand,
+      //   price: this.price,
+      //   gender: this.gender,
+      //   imigUrl: this.imigUrl,
+      //   size: this.size
+      // this.$router.push("/")
     },
 
     gedValue(e) {

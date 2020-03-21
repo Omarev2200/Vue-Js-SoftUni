@@ -12,7 +12,7 @@ const { auth } = require('../utils');
 
 // router.get('/:id', controllers.adCars.getOne);
 
-router.post('/', auth(), controllers.product.post);
+router.post('/',  controllers.product.post);
 
 // router.put('/:id', auth(), controllers.adCars.put);
 

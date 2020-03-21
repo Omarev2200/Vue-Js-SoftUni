@@ -35,7 +35,7 @@
 
               <label for="inputPassword">Confirm Password</label>
               <div class="form-label-group">
-                 <i class="material-icons">lock</i>
+                <i class="material-icons">lock</i>
                 <input
                   type="password"
                   v-model="confirmPassword"
@@ -64,6 +64,7 @@
 </template>
 
 <script >
+import { validationMixin } from 'vuelidate'
 export default {
   data() {
     return {
@@ -72,6 +73,8 @@ export default {
       confirmPassword: ""
     };
   },
+  mixins: [validationMixin],
+  validations: { },
 
   computed: {
     user() {
@@ -110,6 +113,4 @@ export default {
 .material-icons {
   padding-top: 8px;
 }
-
-
 </style>

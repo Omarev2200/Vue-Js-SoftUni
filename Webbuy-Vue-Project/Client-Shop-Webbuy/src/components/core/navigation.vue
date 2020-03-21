@@ -3,29 +3,29 @@
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
         <router-link class="navbar-brand" to="/">WEBBUY</router-link>
-        <router-link class="navbar-brand" v-if="isAdmin === 'Admin'" to="/create-product">Create Product</router-link>
-
+        <router-link class="navbar-brand"  to="/create-product">Create Product</router-link>
+<!-- v-if="isAdmin === 'Admin'" -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" v-if="isLogged">
+            <li class="nav-item" >
               <router-link class="nav-link" to="/profile">
                 <i class="material-icons">account_circle</i>
                 Profile
               </router-link>
             </li>
-            <li class="nav-item" v-if="isLogged">
+            <li class="nav-item" >
               <a class="nav-link" href="#" @click="onLogout">
                 Logout
                 <i class="material-icons">exit_to_app</i>
               </a>
             </li>
-            <li class="nav-item" v-if="!isLogged">
+            <li class="nav-item">
               <router-link class="nav-link" to="/login">
                 <i class="material-icons">lock_open</i>
                 Login
               </router-link>
             </li>
-            <li class="nav-item" v-if="!isLogged">
+            <li class="nav-item">
               <router-link class="nav-link" to="/register">
                 <i class="material-icons">sentiment_satisfied_alt</i>
                 Register
@@ -47,6 +47,7 @@
 </template>
 
 <script >
+
 export default {
   name: "Navigation",
 

@@ -11,12 +11,14 @@
 
       <div class="col-lg-9">
         <Slider />
-        <Productslist :products="products"></Productslist>
+
+        <Productslist :products="lodedProducts"></Productslist>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
 import Productslist from "../products/products-list";
 import Slider from "./slider";
 
@@ -30,15 +32,21 @@ export default {
   data() {
     return {
       limit: null
-    }
+    };
+  },
+  methods: {
+    // this.$store.dispatch("getProducts", this.limit);
+    ...mapActions(["getProducts"])
   },
   computed: {
-    products() {
-      return this.$store.getters.lodedProducts;
-    }
+    ...mapGetters(["lodedProducts"])
   },
-  mounted() {
-    this.$store.dispatch("getProducts", this.limit);
+
+  created() {
+    // products() {
+    //   return this.$store.getters.lodedProducts;
+    // }
+    this.getProducts();
   }
 };
 </script>
