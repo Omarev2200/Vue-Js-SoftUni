@@ -8,29 +8,57 @@
             <form class="form-signin" @submit.prevent="login">
               <label for="inputEmail">Email address</label>
               <div class="form-label-group">
+                <i class="material-icons">email</i>
                 <input
                   type="email"
                   v-model="email"
-                  name="email"
                   id="inputEmail"
                   class="form-control"
-                  placeholder="Email address"
+                  placeholder="Email"
+                  @blur="$v.email.$touch"
                   required
                 />
               </div>
+              <template v-if="$v.email.$error">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  v-if="!$v.email.required"
+                >Email is required!</div>
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  v-else-if="!$v.email.email"
+                >Invalid email!</div>
+              </template>
 
               <label for="inputPassword">Password</label>
               <div class="form-label-group">
+                <i class="material-icons">lock</i>
                 <input
                   type="password"
                   v-model="password"
                   name="password"
                   id="inputPassword"
                   class="form-control"
-                  placeholder="Password"
+                  placeholder="***********"
+                  @blur="$v.password.$touch"
                   required
                 />
               </div>
+
+              <template v-if="$v.password.$error">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  v-if="!$v.password.required"
+                >Password is required!</div>
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  v-else-if="!$v.password.minLength"
+                >Password should be longer than 6 symbols!</div>
+              </template>
 
               <br />
 
@@ -52,12 +80,25 @@
 
 <script >
 // import { mapActions } from "vuex";
+import { validationMixin } from "vuelidate";
+import { required, email, minLength,  } from "vuelidate/lib/validators";
 export default {
+  mixins: [validationMixin],
   data() {
     return {
       email: "",
       password: ""
     };
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    },
   },
 
   computed: {
@@ -85,15 +126,23 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then(() => {
-          
-          this.$router.push("/");
-        })
-        .catch(error => {
-          console.log(error);
-        });
+        
     }
   }
 };
 </script>
+
+<style scoped>
+.form-label-group {
+  display: flex;
+}
+
+.material-icons {
+  padding-top: 8px;
+}
+
+.alert {
+  margin-left: 23px;
+}
+</style>
 

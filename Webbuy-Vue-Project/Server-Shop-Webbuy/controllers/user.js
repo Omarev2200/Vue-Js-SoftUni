@@ -21,8 +21,13 @@ module.exports = {
       const { email, password } = req.body;
       models.User.findOne({ email })
 
-        .then(user => {
-          if (!user) {
+        .then(user =>
+          !!user
+            ? Promise.all([user, user.matchPassword(password)])
+            : [null, false]
+        )
+        .then(([user, match]) => {
+          if (!match) {
             res.status(401).send("Invalid email or password");
             return;
           }
@@ -40,7 +45,9 @@ module.exports = {
       console.log("-".repeat(100));
       models.TokenBlacklist.create({ token })
         .then(() => {
-          res.clearCookie(config.development.authCookieName).send({ logoutSuccess: true });
+          res
+            .clearCookie(config.development.authCookieName)
+            .send({ logoutSuccess: true });
         })
         .catch(next);
     }

@@ -1,3 +1,4 @@
+import Vue from "vue";
 // initial state
 const state = {
   loadProducts: null
@@ -13,7 +14,7 @@ const getters = {
 // actions
 const actions = {
   createProduct({ commit }, payload) {
-    console.log(payload)
+    
     const product = {
       brand: payload.brand,
       gender: payload.gender,
@@ -21,7 +22,7 @@ const actions = {
       imigUrl: payload.imigUrl,
       size: payload.size
     };
-    console.log(product)
+   
     fetch("http://localhost:9999/api/products", {
       method: "POST",
       headers: {
@@ -31,9 +32,16 @@ const actions = {
       body: JSON.stringify(product),
       credentials: "include"
     }).then(() => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "Success",
+        text: "Create"
+      });
       commit("createProduct", {
         ...product
       });
+      
     });
   },
 

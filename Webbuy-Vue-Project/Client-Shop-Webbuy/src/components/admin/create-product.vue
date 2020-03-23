@@ -70,6 +70,11 @@ export default {
         imigUrl: this.imigUrl,
         size: this.size
       });
+      this.brand = null;
+      this.price = null;
+      this.gender = null;
+      this.imigUrl = null;
+      this.size = null;
       // this.$store.dispatch("createProduct", {
       //   brand: this.brand,
       //   price: this.price,

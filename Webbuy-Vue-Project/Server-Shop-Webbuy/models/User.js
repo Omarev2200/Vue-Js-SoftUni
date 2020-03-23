@@ -57,9 +57,9 @@ User.seedAdminUser = async () => {
         if (users.length > 0) return;
         
         return User.create({
-            email: 'admin@abv.bg',
+            email:'admin@abv.bg',
             password: hashedPass,
-            roles: ['Admin'],
+            roles:['Admin'],
             posts:[]
         });
     } catch (e) {

@@ -2,7 +2,7 @@
   <div id="app">
   <Navigation/>
   <router-view/>
-  <notifications group="auth" position="top right"/>
+  <notifications group="auth" position="top center" class="auth"/>
   
   <Footer/>
   </div>
@@ -28,5 +28,10 @@ export default {
 #app {
   padding-top: 56px;
   font-family: 'Oswald', sans-serif;
+}
+.auth{
+  margin-top: 70px;
+  border-radius: 25px;
+;
 }
 </style>

@@ -106,11 +106,12 @@ import Vue from "vue";
         commit("setUser", newUser);
       })
       .catch(error => {
+        console.log(error)
         Vue.notify({
           group: "auth",
           type: "error",
           title: "Warning",
-          text: error
+          text: 'Invalid email or password'
         });
         commit("setLoading", false);
         commit("setError", error);
@@ -125,7 +126,17 @@ import Vue from "vue";
     fetch(`http://localhost:9999/api/user/logout`, {
       method: "POST",
       credentials: "include"
-    }).then(res => res.text());
+    }).then(res =>  {
+      console.log(res)
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "Success",
+        text: "Logout"
+      });
+      res.text()
+    });
+    
     commit("setUser", null);
   },
 
