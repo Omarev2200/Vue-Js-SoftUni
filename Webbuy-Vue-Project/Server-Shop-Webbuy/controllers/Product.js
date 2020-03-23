@@ -18,15 +18,15 @@ getAllMyAdCars: (req, res, next) => {
     
   console.log(req.params.id)
     
-    models.AdCars.find({'author': req.params.id})
-      .then((AdCars) => res.send(AdCars))
+    models.Products.find({'author': req.params.id})
+      .then((Products) => res.send(Products))
       .catch(next);
   },
   
   getOne: (req, res) => {
     
     const postId = req.params.id
-    models.AdCars.findById(postId)
+    models.Products.findById(postId)
       .then(post => {
         res.status(200).json(post)
       }).catch((err) => {

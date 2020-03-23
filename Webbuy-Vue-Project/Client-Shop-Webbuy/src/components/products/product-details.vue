@@ -6,24 +6,13 @@
           <div class="preview col-md-6">
             <div class="preview-pic tab-content">
               <div class="tab-pane active" id="pic-1">
-                <img src="http://placekitten.com/400/252" />
-              </div>
-              <div class="tab-pane" id="pic-2">
-                <img src="http://placekitten.com/400/252" />
-              </div>
-              <div class="tab-pane" id="pic-3">
-                <img src="http://placekitten.com/400/252" />
-              </div>
-              <div class="tab-pane" id="pic-4">
-                <img src="http://placekitten.com/400/252" />
-              </div>
-              <div class="tab-pane" id="pic-5">
-                <img src="http://placekitten.com/400/252" />
+                <img :src="product.imigUrl" />
               </div>
             </div>
           </div>
+
           <div class="details col-md-6">
-            <h3 class="product-title">men's shoes fashion</h3>
+            <h3 class="product-title">{{product.brand}}</h3>
             <div class="rating">
               <div class="stars">
                 <span class="fa fa-star checked"></span>
@@ -36,18 +25,15 @@
 
             <h4 class="price">
               current price:
-              <span>$180</span>
+              <span>${{product.price}}</span>
             </h4>
             <p class="vote">
               <strong>91%</strong> of buyers enjoyed this product!
               <strong>(87 votes)</strong>
             </p>
             <h5 class="sizes">
-              sizes:
-              <span class="size" data-toggle="tooltip" title="small">s</span>
-              <span class="size" data-toggle="tooltip" title="medium">m</span>
-              <span class="size" data-toggle="tooltip" title="large">l</span>
-              <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+              sizes: {{product.size}}
+      
             </h5>
             <h5 class="colors">
               colors:
@@ -73,13 +59,14 @@
 export default {
   name: "Details",
   data() {
-    return{
+    return {
       id: this.$route.params.id
-    }
+    };
   },
-  created() {
-    console.log(this.id);
-    
+  computed: {
+    product() {
+      return this.$store.getters.lodedProduct(this.id);
+    }
   }
 };
 </script>

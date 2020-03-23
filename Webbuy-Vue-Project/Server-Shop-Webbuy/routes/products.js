@@ -10,7 +10,7 @@ const { auth } = require('../utils');
 
 
 
-// router.get('/:id', controllers.adCars.getOne);
+ router.get('/:id', controllers.product.getOne);
 
 router.post('/', auth(), controllers.product.post);
 

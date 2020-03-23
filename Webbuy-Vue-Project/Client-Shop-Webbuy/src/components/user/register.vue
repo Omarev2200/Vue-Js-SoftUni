@@ -5,32 +5,34 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
-            <form class="form-signin" @submit.prevent="register">
-              <label for="inputEmail">Email address</label>
-              <div class="form-label-group">
-                <i class="material-icons">email</i>
-                <input
-                  type="email"
-                  v-model="email"
-                  id="inputEmail"
-                  class="form-control"
-                  placeholder="Email"
-                  @blur="$v.email.$touch"
-                  required
-                />
+            <form class="form-register" @submit.prevent="register">
+              <div class="form-group" :class="{ 'form-group--error': $v.password.$error }">
+                <label for="form-group">Email address</label>
+                <div class="form-label-group">
+                  <i class="material-icons">email</i>
+                  <input
+                    type="email"
+                    v-model="email"
+                    id="inputEmail"
+                    class="form-control"
+                    placeholder="Email"
+                    @blur="$v.email.$touch"
+                    required
+                  />
+                </div>
+                <template v-if="$v.email.$error">
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    v-if="!$v.email.required"
+                  >Email is required!</div>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    v-else-if="!$v.email.email"
+                  >Invalid email!</div>
+                </template>
               </div>
-              <template v-if="$v.email.$error">
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  v-if="!$v.email.required"
-                >Email is required!</div>
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  v-else-if="!$v.email.email"
-                >Invalid email!</div>
-              </template>
 
               <label for="inputPassword">Password</label>
               <div class="form-label-group">
@@ -82,8 +84,10 @@
                 >Passwords don't match!</div>
               </template>
               <br />
-              <button class="btn btn-lg btn-primary btn-block text-uppercase"
-              :disabled="$v.$invalid">
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                :disabled="$v.$invalid"
+              >
                 <span v-if="!loading">Register</span>
 
                 <div v-else>

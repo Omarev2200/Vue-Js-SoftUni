@@ -62,7 +62,7 @@
 
               <br />
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" :disabled="$v.$invalid">
                 <span v-if="!loading">Login</span>
 
                 <div v-else>

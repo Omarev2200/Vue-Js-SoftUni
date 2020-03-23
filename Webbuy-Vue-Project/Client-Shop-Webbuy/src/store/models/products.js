@@ -1,14 +1,24 @@
 import Vue from "vue";
 // initial state
 const state = {
-  loadProducts: null
+  loadProducts: [],
+  loadProduct:null
 };
 
 // getters
 const getters = {
   lodedProducts(state) {
-    return state.loadProducts;
-  }
+    return state.loadProducts
+  },
+  lodedProduct(state) {
+    return (id) => {
+      return state.loadProducts.find((product) => {
+        return product._id === id;
+      })
+    }
+  },
+
+  
 };
 
 // actions
@@ -50,20 +60,33 @@ const actions = {
       `http://localhost:9999/api/products/${payload ? `?limit=${payload}` : ""}`
     )
       .then(res => res.json())
-      .then(data => {
-        let test = data.filter(m => m.gender === "MAN");
-        console.log(test);
-        console.log(data);
-        commit("createProduct", data);
+      .then((data) => {
+        // let test = data.filter(m => m.gender === "MAN");
+        // console.log(test);
+        // console.log(data);
+        commit("createProducts", data);
       });
-  }
+  },
+
+  // getProduct({ commit }, payload) {
+  //   console.log(payload + 'dddd')
+  //   fetch(
+  //     `http://localhost:9999/api/products/${payload}`
+  //   )
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       commit("createProduct", data);
+  //     });
+  // }
 };
 
 // mutations
 const mutations = {
-  createProduct(state, payload) {
+  createProducts(state, payload) {
     state.loadProducts = payload;
-  }
+  },
+ 
 };
 
 export default {
