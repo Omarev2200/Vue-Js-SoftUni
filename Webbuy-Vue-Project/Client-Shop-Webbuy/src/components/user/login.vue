@@ -79,20 +79,19 @@ export default {
   },
 
   methods: {
-    
     login() {
-      
-      this.$store.dispatch("loginUser", {
-        email: this.email,
-        password: this.password
-      })
-      .then(() => {
-        this.$router.push("/")
-      })
-      .catch(error => {
-        console.log(error);
-        
-      })
+      this.$store
+        .dispatch("loginUser", {
+          email: this.email,
+          password: this.password
+        })
+        .then(() => {
+          
+          this.$router.push("/");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

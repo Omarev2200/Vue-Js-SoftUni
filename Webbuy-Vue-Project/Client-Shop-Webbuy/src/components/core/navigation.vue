@@ -3,18 +3,21 @@
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
         <router-link class="navbar-brand" to="/">WEBBUY</router-link>
-        <router-link class="navbar-brand" v-if="isAdmin === 'Admin'"  to="/create-product">Create Product</router-link>
-
+        <router-link
+          class="navbar-brand"
+          v-if="isAdmin === 'Admin'"
+          to="/create-product"
+        >Create Product</router-link>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" >
+            <li class="nav-item">
               <router-link class="nav-link" to="/profile" v-if="isLogged">
                 <i class="material-icons">account_circle</i>
                 Profile
               </router-link>
             </li>
-            <li class="nav-item" >
+            <li class="nav-item">
               <a class="nav-link" href="/login" v-if="isLogged" @click="onLogout">
                 Logout
                 <i class="material-icons">exit_to_app</i>
@@ -65,13 +68,15 @@ export default {
     }
   },
 
+  
+
   methods: {
     onLogout() {
       // this.$store.dispatch("logout");
       fetch(`http://localhost:9999/api/user/logout`, {
-      method: "POST",
-      credentials: "include"
-    }).then(res => res.text());
+        method: "POST",
+        credentials: "include"
+      }).then(res => res.text());
     }
   }
 };

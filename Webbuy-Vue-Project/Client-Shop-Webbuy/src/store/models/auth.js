@@ -25,6 +25,14 @@ import Vue from "vue";
 
 // actions
  actions :{
+   auth() {
+     console.log('eee')
+    fetch("http://localhost:9999/api/auth")
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+      })
+   },
   registerUser({ commit }, payload) {
     commit("setLoading", true);
     commit("clearError");

@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     // this.$store.dispatch("getProducts", this.limit);
-    ...mapActions(["getProducts"])
+    ...mapActions(["getProducts"]),
+    
   },
   computed: {
     ...mapGetters(["lodedProducts"])
