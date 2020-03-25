@@ -1,6 +1,7 @@
 <template>
   <div id="app">
   <Navigation/>
+ 
   <router-view/>
   <notifications group="auth" position="top center" class="auth"/>
   
@@ -12,11 +13,13 @@
 import Navigation from './components/core/navigation';
 import Footer from './components/core/footer';
 
+
 export default {
   name: 'App',
   components: {
     Navigation,
     Footer, 
+    
   },
  
 };

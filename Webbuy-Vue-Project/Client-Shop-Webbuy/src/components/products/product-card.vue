@@ -14,6 +14,7 @@
           <li>{{product.gender}}</li>
           <li>SIZE{{product.size}}</li>
         </ul>
+        <button type="button" class="btn btn-primary" @click='addToCart()' >ADD TO CART</button>
       </div>
     </div>
   </div>
@@ -23,7 +24,16 @@
 export default {
   name: "ProductCard",
 
-  props: ["product"]
+  props: ["product"],
+
+  methods:{
+    addToCart() {
+      this.$store.dispatch('addProductToCart', {
+        product: this.product,
+        quantity:1
+      })
+    }
+  }
 };
 </script>
 <style  scoped>

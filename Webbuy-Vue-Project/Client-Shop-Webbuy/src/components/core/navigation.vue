@@ -37,10 +37,11 @@
             </li>
             <li class="nav-item"></li>
             <li>
-              <router-link class="nav-link" to="/user/cart">
+              <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
                 Cart
-                <span>0</span>
+                
+                <span class="quantity">{{quantity}}</span>
               </router-link>
             </li>
           </ul>
@@ -56,6 +57,9 @@ export default {
   name: "Navigation",
 
   computed: {
+    quantity() {
+        return this.$store.getters.cartItemCount;
+    },
     isLogged() {
       return !!this.$store.getters.user;
     },
@@ -98,6 +102,9 @@ a {
 
 .material-icons {
   padding-bottom: 8px;
+}
+.quantity{
+  padding-left: 5px;
 }
 </style>
 

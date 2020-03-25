@@ -6,7 +6,7 @@
           <div class="preview col-md-6">
             <div class="preview-pic tab-content">
               <div class="tab-pane active" id="pic-1">
-                <img :src="product.imigUrl" />
+                <img :src="product.imigUrl"/>
               </div>
             </div>
           </div>
@@ -45,8 +45,10 @@
               <span class="color green"></span>
               <span class="color blue"></span>
             </h5>
-            <div class="action">
-              <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+            <div class="action-buttons">
+              <button type="button" class="btn btn-primary" @click='addToCart()' >ADD TO CART</button>
+              <button type="button" class="btn btn-warning">EDIT</button>
+              <button type="button" class="btn btn-danger">DELETE</button>
             </div>
           </div>
         </div>
@@ -60,8 +62,17 @@ export default {
   name: "Details",
   data() {
     return {
+      
       id: this.$route.params.id
     };
+  },
+  methods:{
+    addToCart() {
+      this.$store.dispatch('addProductToCart', {
+        product: this.product,
+        quantity:1
+      })
+    }
   },
   computed: {
     product() {
@@ -271,6 +282,10 @@ img {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+}
+
+button.btn{
+margin-right: 30px;
 }
 
 @keyframes opacity {
