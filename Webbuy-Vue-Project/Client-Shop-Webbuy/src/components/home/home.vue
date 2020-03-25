@@ -11,7 +11,7 @@
 
       <div class="col-lg-9">
         <Slider />
-
+<div v-if="!lodedProducts">No Product</div>
         <Productslist :products="lodedProducts"></Productslist>
       </div>
     </div>

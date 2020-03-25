@@ -5,10 +5,8 @@
         <h1 class="jumbotron-heading">WEBBUY CART</h1>
       </div>
     </section>
-{{cart.length>0}}
-      
+
     <div class="container mb-4" v-if="cart.length>0">
-{{!cart}}
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">

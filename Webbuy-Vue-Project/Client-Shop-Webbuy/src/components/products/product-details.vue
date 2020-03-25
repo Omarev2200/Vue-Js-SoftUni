@@ -45,10 +45,11 @@
               <span class="color green"></span>
               <span class="color blue"></span>
             </h5>
+           {{product._id}}
             <div class="action-buttons">
               <button type="button" class="btn btn-primary" @click='addToCart()' >ADD TO CART</button>
-              <button type="button" class="btn btn-warning">EDIT</button>
-              <button type="button" class="btn btn-danger">DELETE</button>
+              <button type="button" class="btn btn-warning" v-if="isAdmin === 'Admin'" @click="editeProduct(product._id)">EDIT</button>
+              <button type="button" class="btn btn-danger" v-if="isAdmin === 'Admin'" @click="deliteProduct(product._id)">DELETE</button>
             </div>
           </div>
         </div>
@@ -67,14 +68,30 @@ export default {
     };
   },
   methods:{
+    
     addToCart() {
       this.$store.dispatch('addProductToCart', {
         product: this.product,
         quantity:1
       })
+    },
+
+    editeProduct(id) {
+        this.$store.dispatch("editeProduct", id);
+    },
+
+    deliteProduct(id) {
+        this.$store.dispatch("deliteProduct", id)
+           
     }
   },
   computed: {
+    isAdmin() {
+      if (!this.$store.getters.user) {
+        return;
+      }
+      return this.$store.getters.user.roles;
+    },
     product() {
       return this.$store.getters.lodedProduct(this.id);
     }

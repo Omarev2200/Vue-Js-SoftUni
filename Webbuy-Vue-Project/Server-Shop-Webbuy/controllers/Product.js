@@ -62,8 +62,8 @@ getAllMyAdCars: (req, res, next) => {
 
   delete: (req, res, next) => {
     const id = req.params.id;
-    models.AdCars.deleteOne({ _id: id })
-      .then((removedAdCars) => res.send(removedAdCars))
+    models.Products.deleteOne({ _id: id })
+      .then((removedProduct) => res.send(removedProduct))
       .catch(next)
   },
 

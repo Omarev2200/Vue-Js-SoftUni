@@ -1,4 +1,5 @@
 import Vue from "vue";
+import router from '../../router';
 // initial state
 const state = {
   loadProducts: [],
@@ -63,7 +64,8 @@ const actions = {
         title: "Success",
         text: "Create"
       });
-      commit("createProduct", {
+      router.push("/");
+      commit("createProducts", {
         ...product
       });
     });
@@ -95,6 +97,26 @@ const actions = {
   // }
   addProductToCart({ commit }, { product, quantity }) {
     commit("addToCart", { product, quantity });
+  },
+  deliteProduct({commit},payload) {
+    console.log(payload);
+    
+    fetch(`http://localhost:9999/api/products/${payload}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+  
+            credentials: 'include'
+        }
+        )
+            .then(res => res.json())
+            .then(() => {
+              router.push("/");
+              
+              commit('deliteProduct', payload)
+            })
   }
 };
 
@@ -120,6 +142,11 @@ const mutations = {
   removeProductFromCart(state,product) {
     state.cart =state.cart.filter(item => {
       return item.product._id !== product._id;
+    })
+  },
+  deliteProduct(state,payload) {
+    state.cart = state.cart.filter(item => {
+      return item.product._id !== payload;
     })
   }
 };

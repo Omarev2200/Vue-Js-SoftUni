@@ -16,6 +16,6 @@ router.post('/', auth(), controllers.product.post);
 
 // router.put('/:id', auth(), controllers.adCars.put);
 
-// router.delete('/:id', auth(), controllers.adCars.delete);
+ router.delete('/:id', auth(), controllers.product.delete);
 
 module.exports = router;
