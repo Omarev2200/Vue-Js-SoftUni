@@ -6,13 +6,13 @@
           <div class="preview col-md-6">
             <div class="preview-pic tab-content">
               <div class="tab-pane active" id="pic-1">
-                <img :src="product.imigUrl"/>
+                <img :src="product.imigUrl" />
               </div>
             </div>
           </div>
 
           <div class="details col-md-6">
-            <h3 class="product-title">{{product.brand}}</h3>
+            <h3 class="product-title">{{ product.brand }}</h3>
             <div class="rating">
               <div class="stars">
                 <span class="fa fa-star checked"></span>
@@ -25,16 +25,13 @@
 
             <h4 class="price">
               current price:
-              <span>${{product.price}}</span>
+              <span>${{ product.price }}</span>
             </h4>
             <p class="vote">
               <strong>91%</strong> of buyers enjoyed this product!
               <strong>(87 votes)</strong>
             </p>
-            <h5 class="sizes">
-              sizes: {{product.size}}
-      
-            </h5>
+            <h5 class="sizes">sizes: {{ product.size }}</h5>
             <h5 class="colors">
               colors:
               <span
@@ -45,11 +42,32 @@
               <span class="color green"></span>
               <span class="color blue"></span>
             </h5>
-           {{product._id}}
+            
             <div class="action-buttons">
-              <button type="button" class="btn btn-primary" @click='addToCart()' >ADD TO CART</button>
-              <button type="button" class="btn btn-warning" v-if="isAdmin === 'Admin'" @click="editeProduct(product._id)">EDIT</button>
-              <button type="button" class="btn btn-danger" v-if="isAdmin === 'Admin'" @click="deliteProduct(product._id)">DELETE</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="addToCart()"
+              >
+                ADD TO CART
+              </button>
+              <router-link
+                type="button"
+                class="btn btn-warning"
+                v-if="isAdmin === 'Admin'"
+                :to="'/product-edit/' + product._id"
+                @click="editeProduct(product._id)"
+              >
+                EDIT
+              </router-link>
+              <button
+                type="button"
+                class="btn btn-danger"
+                
+                v-if="isAdmin === 'Admin'"
+                @click="deliteProduct(product._id)"
+                >DELETE</button
+              >
             </div>
           </div>
         </div>
@@ -58,31 +76,28 @@
   </div>
 </template>
 
-<script >
+<script>
 export default {
   name: "Details",
   data() {
     return {
-      
       id: this.$route.params.id
     };
   },
-  methods:{
-    
+  methods: {
     addToCart() {
-      this.$store.dispatch('addProductToCart', {
+      this.$store.dispatch("addProductToCart", {
         product: this.product,
-        quantity:1
-      })
+        quantity: 1
+      });
     },
 
     editeProduct(id) {
-        this.$store.dispatch("editeProduct", id);
+      this.$store.dispatch("editeProduct", id);
     },
 
     deliteProduct(id) {
-        this.$store.dispatch("deliteProduct", id)
-           
+      this.$store.dispatch("deliteProduct", id);
     }
   },
   computed: {
@@ -99,7 +114,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 /*****************globals*************/
 body {
   font-family: "open sans";
@@ -301,8 +316,8 @@ img {
   }
 }
 
-button.btn{
-margin-right: 30px;
+button.btn {
+  margin-right: 30px;
 }
 
 @keyframes opacity {

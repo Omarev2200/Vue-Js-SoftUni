@@ -14,7 +14,7 @@ const { auth } = require('../utils');
 
 router.post('/', auth(), controllers.product.post);
 
-// router.put('/:id', auth(), controllers.adCars.put);
+ router.put('/:id', auth(), controllers.product.put);
 
  router.delete('/:id', auth(), controllers.product.delete);
 

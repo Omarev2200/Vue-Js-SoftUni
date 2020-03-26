@@ -117,6 +117,31 @@ const actions = {
               
               commit('deliteProduct', payload)
             })
+  },
+  editProduct({commit},payload) {
+    const editPoduct = {
+      brand: payload.brand,
+      gender: payload.gender,
+      price: payload.price,
+      imigUrl: payload.imigUrl,
+      size: payload.size
+    };
+    fetch(`http://localhost:9999/api/products/${payload.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(editPoduct),
+      credentials: 'include'
+    }
+    )
+    .then(res => res.json())
+    .then((data) => {
+       router.push("/");
+      commit('createProducts',data)
+              
+            })
   }
 };
 

@@ -7,7 +7,8 @@
           class="navbar-brand"
           v-if="isAdmin === 'Admin'"
           to="/create-product"
-        >Create Product</router-link>
+          >Create Product</router-link
+        >
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
@@ -18,7 +19,12 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login" v-if="isLogged" @click="onLogout">
+              <a
+                class="nav-link"
+                href="/login"
+                v-if="isLogged"
+                @click.prevent="onLogout"
+              >
                 Logout
                 <i class="material-icons">exit_to_app</i>
               </a>
@@ -40,8 +46,8 @@
               <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
                 Cart
-                
-                <span class="quantity">{{quantity}}</span>
+                {{token}}
+                <span class="quantity">{{ quantity }}</span>
               </router-link>
             </li>
           </ul>
@@ -51,14 +57,14 @@
   </div>
 </template>
 
-<script >
+<script>
 // import { mapActions } from "vuex";
 export default {
   name: "Navigation",
 
   computed: {
     quantity() {
-        return this.$store.getters.cartItemCount;
+      return this.$store.getters.cartItemCount;
     },
     isLogged() {
       return !!this.$store.getters.user;
@@ -69,23 +75,21 @@ export default {
         return;
       }
       return this.$store.getters.user.roles;
+    },
+
+    token() {
+      return this.$store.getters.tokenAuth;
     }
   },
 
-  
-
   methods: {
     onLogout() {
-      // this.$store.dispatch("logout");
-      fetch(`http://localhost:9999/api/user/logout`, {
-        method: "POST",
-        credentials: "include"
-      }).then(res => res.text());
+      this.$store.dispatch("logout");
     }
   }
 };
 </script>
-<style scoped >
+<style scoped>
 .navbar {
   background-color: aqua;
 }
@@ -103,10 +107,7 @@ a {
 .material-icons {
   padding-bottom: 8px;
 }
-.quantity{
+.quantity {
   padding-left: 5px;
 }
 </style>
-
-
-

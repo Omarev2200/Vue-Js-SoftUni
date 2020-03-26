@@ -6,11 +6,12 @@
         <div class="list-group">
           <a href="#" class="list-group-item">MEN</a>
           <a href="#" class="list-group-item">WOMEN</a>
+          <button type="submit" @click.prevent="auth">auth</button>
         </div>
       </div>
 
       <div class="col-lg-9">
-        <Slider />
+        <!-- <Slider /> -->
 <div v-if="!lodedProducts">No Product</div>
         <Productslist :products="lodedProducts"></Productslist>
       </div>
@@ -20,13 +21,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Productslist from "../products/products-list";
-import Slider from "./slider";
+// import Slider from "./slider";
 
 export default {
   name: "Home",
 
   components: {
-    Slider,
+    // Slider,
     Productslist
   },
   data() {
@@ -34,9 +35,11 @@ export default {
       limit: null
     };
   },
+ 
   methods: {
     // this.$store.dispatch("getProducts", this.limit);
     ...mapActions(["getProducts"]),
+    
     
   },
   computed: {

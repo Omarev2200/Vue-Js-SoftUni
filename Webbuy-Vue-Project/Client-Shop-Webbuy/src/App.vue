@@ -19,9 +19,8 @@ export default {
   components: {
     Navigation,
     Footer, 
-    
   },
- 
+  
 };
 </script>
 
@@ -37,4 +36,5 @@ export default {
   border-radius: 25px;
 ;
 }
+
 </style>

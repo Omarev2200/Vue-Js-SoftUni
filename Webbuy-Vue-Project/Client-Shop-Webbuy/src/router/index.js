@@ -7,11 +7,12 @@ import Register from "../components/user/register";
 import Profile from "../components/user/profile";
 import CreateProduct from "../components/admin/create-product";
 import ProductDetails from "../components/products/product-details";
+import ProductEdit from "../components/products/product-edit.vue";
 import ShopingCard from "../components/products/shoping-cart";
 
 import NotFound from "../components/not-found/not-found";
 import AuthGuard from "./auth-guard";
-import GuestGuard from "./guest-guard";
+// import GuestGuard from "./guest-guard";
 
 Vue.use(Router);
 
@@ -27,14 +28,14 @@ export default new Router({
       path: "/login",
       name: "Login",
       component: Login,
-      beforeEnter: GuestGuard
+      // beforeEnter: GuestGuard
     },
 
     {
       path: "/register",
       name: "Register",
       component: Register,
-      beforeEnter: GuestGuard
+      // beforeEnter: GuestGuard
     },
 
     {
@@ -54,6 +55,11 @@ export default new Router({
       path: "/details-product/:id",
       name: "ProductDetails",
       component: ProductDetails
+    },
+    {
+      path: "/product-edit/:id",
+      name: "ProductEdit",
+      component: ProductEdit
     },
 
     {
