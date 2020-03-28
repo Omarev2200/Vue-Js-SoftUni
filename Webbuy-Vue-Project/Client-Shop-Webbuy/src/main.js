@@ -1,8 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+
 import store from "./store";
-import bootstrap from "./plugins/bootstrap.js";
+import bootstrap  from "./plugins/bootstrap.js";
 import notifications from "./plugins/notifications";
 import Capitalize from './filters/capitalize';
 

@@ -1,5 +1,7 @@
 import Vue from "vue";
+import axios from "axios";
 import router from "../../router";
+axios.defaults.withCredentials = true
 export default {
   // initial state
   state: {
@@ -70,16 +72,17 @@ export default {
     loginUser({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
-      fetch("http://localhost:9999/api/user/login", {
-        body: JSON.stringify(payload),
-        method: "POST",
-        headers: {
-          "Content-type": "application/json"
-        },
-        credentials: "include"
-      })
-        .then(response => response.json())
-        .then(data => {
+      axios
+        .post(
+          "http://localhost:9999/api/user/login",
+          {
+            email: payload.email,
+            password: payload.password,
+            
+          },
+        )
+
+        .then(response => {
           commit("setLoading", false);
           Vue.notify({
             group: "auth",
@@ -89,11 +92,11 @@ export default {
           });
 
           const newUser = {
-            id: data._id,
-            role: data.roles,
-            email: data.email,
-            posts: data.posts,
-            roles: data.roles[0]
+            id: response.data._id,
+            role: response.data.roles,
+            email: response.data.email,
+            posts: response.data.posts,
+            roles: response.data.roles[0]
           };
 
           commit("setUser", newUser);
