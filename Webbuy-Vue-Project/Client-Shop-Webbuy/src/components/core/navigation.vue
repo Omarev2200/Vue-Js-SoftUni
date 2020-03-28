@@ -14,8 +14,9 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link class="nav-link" to="/profile" v-if="isLogged">
-                <i class="material-icons">account_circle</i>
-                Profile
+                <span class="material-icons">
+add_shopping_cart
+</span>
               </router-link>
             </li>
             <li class="nav-item">
