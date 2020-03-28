@@ -6,7 +6,7 @@
       </router-link>
       <div class="card-body">
         <h4 class="card-title">
-          <router-link :to="'/details-product/'+product._id">{{product.brand}}</router-link>
+          <router-link :to="'/details-product/'+product._id">{{product.brand }}</router-link>
         </h4>
         <h5>{{product.price}} €</h5>
 

@@ -46,7 +46,7 @@
               <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
                 Cart
-                {{token}}
+              
                 <span class="quantity">{{ quantity }}</span>
               </router-link>
             </li>
@@ -77,9 +77,7 @@ export default {
       return this.$store.getters.user.roles;
     },
 
-    token() {
-      return this.$store.getters.tokenAuth;
-    }
+  
   },
 
   methods: {

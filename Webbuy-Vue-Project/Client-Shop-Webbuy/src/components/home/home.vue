@@ -6,7 +6,7 @@
         <div class="list-group">
           <a href="#" class="list-group-item">MEN</a>
           <a href="#" class="list-group-item">WOMEN</a>
-          <button type="submit" @click.prevent="auth">auth</button>
+          
         </div>
       </div>
 
