@@ -5,7 +5,7 @@
 
       <div class="col-lg-9">
         
-        <div class="no-products" v-if="womanProducts">
+        <div class="no-products" v-if="!womanProducts">
           <h1 >No Products</h1>
         </div>
         <Productslist :products="womanProducts"></Productslist>

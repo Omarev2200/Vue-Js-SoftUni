@@ -4,7 +4,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center">Create Product</h5>
+            <h5 class="card-title text-center">Edit Product</h5>
             <form class="form-signin" @submit.prevent="onCreateProduct">
               <label for="inputEmail">Brand</label>
               <div class="brand-label-group">
@@ -23,16 +23,12 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.brand.required"
-                >
-                  Brand is required!
-                </div>
+                >Brand is required!</div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.brand.minLength"
-                >
-                  Brand lenght should be longer than 3 symbols!
-                </div>
+                >Brand lenght should be longer than 3 symbols!</div>
               </template>
 
               <label for="gender">Gender</label>
@@ -44,7 +40,7 @@
                 @change="gedValue($event)"
                 required
               >
-                <option value=""> Select Gender:</option>
+                <option value>Select Gender:</option>
                 <option value="1">MAN</option>
                 <option value="2">WOMAN</option>
               </select>
@@ -53,9 +49,7 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.gender.required"
-                >
-                  Gender is required!
-                </div>
+                >Gender is required!</div>
               </template>
 
               <label for="inputEmail">Praice</label>
@@ -75,16 +69,12 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.price.required"
-                >
-                  Price is required!
-                </div>
+                >Price is required!</div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.price.numeric"
-                >
-                  The price must be a number!
-                </div>
+                >The price must be a number!</div>
               </template>
 
               <label for="inputEmail">Imige</label>
@@ -104,16 +94,8 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.imigUrl.required"
-                >
-                  Imige is required!
-                </div>
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  v-if="!$v.imigUrl.url"
-                >
-                  Url not match!
-                </div>
+                >Imige is required!</div>
+                <div class="alert alert-danger" role="alert" v-if="!$v.imigUrl.url">Url not match!</div>
               </template>
               <img class="imig" :src="imigUrl" alt />
               <br />
@@ -134,19 +116,14 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.size.required"
-                >
-                  Size is required!
-                </div>
+                >Size is required!</div>
               </template>
               <br />
               <button
                 class="btn btn-lg btn-primary btn-block text-uppercase"
                 type="submit"
                 :disabled="$v.$invalid"
-              >
-                Create Product
-             
-              </button>
+              >Edit Product</button>
             </form>
           </div>
         </div>

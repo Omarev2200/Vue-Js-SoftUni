@@ -9,7 +9,7 @@ import CreateProduct from "../components/admin/create-product";
 import ProductDetails from "../components/products/product-details";
 import ProductEdit from "../components/products/product-edit.vue";
 import ShopingCard from "../components/products/shoping-cart";
-import ProductsMen from '../components/products/products-men.vue';
+import ProductsMаn from '../components/products/products-mаn.vue';
 import ProductsWoman from '../components/products/products-woman.vue';
 import NotFound from "../components/not-found/not-found";
 import AuthGuard from "./auth-guard";
@@ -71,9 +71,9 @@ export default new Router({
       component: ShopingCard
     },
     {
-      path: "/products-men",
-      name: "ProductsMen",
-      component: ProductsMen
+      path: "/products-mаn",
+      name: "ProductsMаn",
+      component: ProductsMаn
     },
     {
       path: "/products-woman",

@@ -15,7 +15,7 @@
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Product</th>
-                  <th scope="col">Available</th>
+                  <th scope="col">Size</th>
                   <th scope="col" class="text-center">Quantity</th>
                   <th scope="col" class="text-right">Price</th>
                   <th></th>
@@ -27,7 +27,7 @@
                     <img class="imige-cart" :src="product.product.imigUrl" />
                   </td>
                   <td>{{product.product.brand}}</td>
-                  <td>In stock</td>
+                  <td>{{product.product.size}}</td>
                   <td>
                     <input class="form-control" type="text" :value="product.quantity" />
                   </td>

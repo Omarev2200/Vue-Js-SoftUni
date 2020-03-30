@@ -1,5 +1,6 @@
 import Vue from "vue";
-import router from '../../router';
+import router from "../../router";
+import axios from "axios";
 // initial state
 const state = {
   loadProducts: [],
@@ -30,15 +31,15 @@ const getters = {
     let total = 0;
     state.cart.forEach(item => {
       total += item.product.price * item.quantity;
-    })
+    });
     return total;
   }
 };
 
 // actions
 const actions = {
-  removeProductFromCart({commit}, product) {
-    commit('removeProductFromCart', product)
+  removeProductFromCart({ commit }, product) {
+    commit("removeProductFromCart", product);
   },
   createProduct({ commit }, payload) {
     const product = {
@@ -48,91 +49,66 @@ const actions = {
       imigUrl: payload.imigUrl,
       size: payload.size
     };
-
-    fetch("http://localhost:9999/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(product),
-      credentials: "include"
-    }).then(() => {
-      Vue.notify({
-        group: "auth",
-        type: "success",
-        title: "Success",
-        text: "Create"
+    axios
+      .post("products", {
+        brand: payload.brand,
+        gender: payload.gender,
+        price: payload.price,
+        imigUrl: payload.imigUrl,
+        size: payload.size
+      })
+      .then(() => {
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "Success",
+          text: "Create"
+        });
+        router.push("/");
+        commit("createProducts", {
+          ...product
+        });
       });
-      router.push("/");
-      commit("createProducts", {
-        ...product
-      });
-    });
   },
 
   getProducts({ commit }, payload) {
-    fetch(
-      `http://localhost:9999/api/products/${payload ? `?limit=${payload}` : ""}`
-    )
-      .then(res => res.json())
-      .then(data => {
+    axios
+      .get(`products/${payload ? `?limit=${payload}` : ""}`)
+
+      .then(res => {
         // let test = data.filter(m => m.gender === "MAN");
         // console.log(test);
         // console.log(data);
-        commit("createProducts", data);
+        commit("createProducts", res.data);
       });
   },
 
   addProductToCart({ commit }, { product, quantity }) {
     commit("addToCart", { product, quantity });
   },
-  deliteProduct({commit},payload) {
+  deliteProduct({ commit }, payload) {
     console.log(payload);
-    
-    fetch(`http://localhost:9999/api/products/${payload}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-  
-            credentials: 'include'
-        }
-        )
-            .then(res => res.json())
-            .then(() => {
-              router.push("/");
-              
-              commit('deliteProduct', payload)
-            })
+
+    axios.delete(`products/${payload}`).then(() => {
+      router.push("/");
+
+      commit("deliteProduct", payload);
+    });
   },
-  editProduct({commit},payload) {
-    const editPoduct = {
-      brand: payload.brand,
-      gender: payload.gender,
-      price: payload.price,
-      imigUrl: payload.imigUrl,
-      size: payload.size
-    };
-    fetch(`http://localhost:9999/api/products/${payload.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(editPoduct),
-      credentials: 'include'
-    }
-    )
-    .then(res => res.json())
-    .then((data) => {
-       router.push("/");
-      commit('createProducts',data)
-              
-            })
+  editProduct({ commit }, payload) {
+    axios
+      .put(`products/${payload.id}`, {
+        brand: payload.brand,
+        gender: payload.gender,
+        price: payload.price,
+        imigUrl: payload.imigUrl,
+        size: payload.size
+      })
+      .then(res => {
+        router.push("/");
+        commit("createProducts", res.data);
+      });
   }
-  
 };
 
 // mutations
@@ -154,15 +130,15 @@ const mutations = {
       quantity
     });
   },
-  removeProductFromCart(state,product) {
-    state.cart =state.cart.filter(item => {
+  removeProductFromCart(state, product) {
+    state.cart = state.cart.filter(item => {
       return item.product._id !== product._id;
-    })
+    });
   },
-  deliteProduct(state,payload) {
+  deliteProduct(state, payload) {
     state.cart = state.cart.filter(item => {
       return item.product._id !== payload;
-    })
+    });
   }
 };
 

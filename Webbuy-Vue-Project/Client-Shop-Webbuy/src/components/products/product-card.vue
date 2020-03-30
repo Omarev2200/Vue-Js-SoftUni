@@ -45,7 +45,7 @@ export default {
 }
 
 .card-img-top {
-  width: 220px;
+  width: 252px;
   height: 220px;
 }
 </style>>
