@@ -28,6 +28,13 @@ export default {
 
   // actions
   actions: {
+    isAuth({commit}) {
+      axios.get('auth')
+      .then((res) =>{
+        
+        commit('setUser',res.data)
+      })
+    },  
     registerUser({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
@@ -77,7 +84,7 @@ export default {
           password: payload.password
         })
 
-        .then(response => {
+        .then((response) => {
           commit("setLoading", false);
           Vue.notify({
             group: "auth",
@@ -110,7 +117,7 @@ export default {
     },
 
     logout({ commit }) {
-      axios.post(`user/logout`).then(res => {
+      axios.post(`user/logout`).then(()=> {
         router.push("/login");
         Vue.notify({
           group: "auth",
@@ -118,7 +125,7 @@ export default {
           title: "Success",
           text: "Logout"
         });
-        res.text();
+        
       });
 
       commit("setUser", null);

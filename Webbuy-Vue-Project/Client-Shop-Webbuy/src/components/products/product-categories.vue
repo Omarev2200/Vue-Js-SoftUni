@@ -4,15 +4,21 @@
         <div class="list-group">
           <router-link to="/products-mаn" class="list-group-item">MАN</router-link>
           <router-link to="/products-woman" class="list-group-item">WOMAN</router-link>
-          
+          <SearchBaend></SearchBaend>
         </div>
       </div>
 </template>
 
 <script>
+import SearchBaend from "../products/search-brand";
+
 export default {
-name: 'Categories'
+name: 'Categories',
+components:{
+    SearchBaend
 }
+}
+
 </script>
 
 <style>
