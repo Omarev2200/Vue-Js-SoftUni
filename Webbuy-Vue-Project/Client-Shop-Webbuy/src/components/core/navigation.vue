@@ -17,7 +17,7 @@
                 Profile
               </router-link>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" href="/login" v-if="isLogged" @click.prevent="onLogout">
                 Logout
@@ -40,7 +40,6 @@
             <li>
               <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
-
                 Cart
                 <span class="quantity">{{ quantity }}</span>
               </router-link>

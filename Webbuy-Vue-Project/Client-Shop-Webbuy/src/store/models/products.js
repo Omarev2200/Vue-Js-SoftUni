@@ -84,17 +84,6 @@ const actions = {
       });
   },
 
-  // getProduct({ commit }, payload) {
-  //   console.log(payload + 'dddd')
-  //   fetch(
-  //     `http://localhost:9999/api/products/${payload}`
-  //   )
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       commit("createProduct", data);
-  //     });
-  // }
   addProductToCart({ commit }, { product, quantity }) {
     commit("addToCart", { product, quantity });
   },
@@ -143,6 +132,7 @@ const actions = {
               
             })
   }
+  
 };
 
 // mutations
