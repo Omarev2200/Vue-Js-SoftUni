@@ -27,47 +27,24 @@
               current price:
               <span>${{ product.price }}</span>
             </h4>
-            <p class="vote">
-              <strong>91%</strong> of buyers enjoyed this product!
-              <strong>(87 votes)</strong>
-            </p>
-            <h5 class="sizes">sizes: {{ product.size }}</h5>
-            <h5 class="colors">
-              colors:
-              <span
-                class="color orange not-available"
-                data-toggle="tooltip"
-                title="Not In store"
-              ></span>
-              <span class="color green"></span>
-              <span class="color blue"></span>
-            </h5>
             
+            <h5 class="sizes">sizes: {{ product.size }}</h5>
+
             <div class="action-buttons">
-              <button
-                type="button"
-                class="btn btn-primary"
-                @click="addToCart()"
-              >
-                ADD TO CART
-              </button>
+              <button type="button" class="btn btn-primary" @click="addToCart()">ADD TO CART</button>
               <router-link
                 type="button"
-                class="btn btn-warning"
+                class="btn edit btn-warning"
                 v-if="isAdmin === 'Admin'"
                 :to="'/product-edit/' + product._id"
                 @click="editeProduct(product._id)"
-              >
-                EDIT
-              </router-link>
+              >EDIT</router-link>
               <button
                 type="button"
                 class="btn btn-danger"
-                
                 v-if="isAdmin === 'Admin'"
                 @click="deliteProduct(product._id)"
-                >DELETE</button
-              >
+              >DELETE</button>
             </div>
           </div>
         </div>
@@ -331,6 +308,11 @@ button.btn {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+}
+.btn.edit{
+      padding-right: 30px;
+    margin-right: 30px;
+
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,12 +1,17 @@
 import store from "../store";
 export default (to, from, next) => {
-  const isAuthenticated = store.getters.user;
-  console.log(store.getters.user);
-  if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
-  else next();
-  //     if (store.getters.user) {
-  //         next('/login')
-  //     }else{
-  //         next()
-  //     }
+  let isAuthenticated = true;
+
+    if (store.getters.user) {
+        isAuthenticated =false;
+        
+    }else{
+        isAuthenticated = true;
+    }
+
+    if(isAuthenticated) {
+        next(); // allow to enter route
+       } else{
+        next('/login'); // go to '/login';
+       }
 };

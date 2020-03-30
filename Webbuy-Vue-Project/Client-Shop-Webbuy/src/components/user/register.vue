@@ -138,7 +138,7 @@ export default {
       return this.$store.getters.loading;
     }
   },
-  created() {},
+  
   watch: {
     user(value) {
       if (value !== null && value !== undefined) {

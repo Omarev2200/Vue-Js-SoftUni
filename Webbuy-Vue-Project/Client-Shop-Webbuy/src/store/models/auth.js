@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 import router from "../../router";
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 export default {
   // initial state
   state: {
@@ -31,16 +31,14 @@ export default {
     registerUser({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
-      fetch("http://localhost:9999/api/user/register", {
-        body: JSON.stringify(payload),
-        method: "POST",
-        headers: {
-          "Content-type": "application/json"
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data.email);
+      axios
+        .post("user/register", {
+          email: payload.email,
+          password: payload.password
+        })
+
+        .then(res => {
+          console.log(res.data.email);
 
           Vue.notify({
             group: "auth",
@@ -48,6 +46,7 @@ export default {
             title: "Success",
             text: "Register"
           });
+          router.push("/login");
           commit("setLoading", false);
           //  const newUser = {
           //   id: data._id,
@@ -73,14 +72,10 @@ export default {
       commit("setLoading", true);
       commit("clearError");
       axios
-        .post(
-          "http://localhost:9999/api/user/login",
-          {
-            email: payload.email,
-            password: payload.password,
-            
-          },
-        )
+        .post("user/login", {
+          email: payload.email,
+          password: payload.password
+        })
 
         .then(response => {
           commit("setLoading", false);
@@ -114,15 +109,8 @@ export default {
         });
     },
 
-    authSingIn({ commit }, payload) {
-      commit("setUser", { id: payload.uid, userOrders: [] });
-    },
-
     logout({ commit }) {
-      fetch(`http://localhost:9999/api/user/logout`, {
-        method: "POST",
-        credentials: "include"
-      }).then(res => {
+      axios.post(`user/logout`).then(res => {
         router.push("/login");
         Vue.notify({
           group: "auth",

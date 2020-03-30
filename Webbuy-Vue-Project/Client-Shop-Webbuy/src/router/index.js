@@ -12,7 +12,7 @@ import ShopingCard from "../components/products/shoping-cart";
 
 import NotFound from "../components/not-found/not-found";
 import AuthGuard from "./auth-guard";
-// import GuestGuard from "./guest-guard";
+import GuestGuard from "./guest-guard";
 
 Vue.use(Router);
 
@@ -28,14 +28,14 @@ export default new Router({
       path: "/login",
       name: "Login",
       component: Login,
-      // beforeEnter: GuestGuard
+      beforeEnter: GuestGuard
     },
 
     {
       path: "/register",
       name: "Register",
       component: Register,
-      // beforeEnter: GuestGuard
+      beforeEnter: GuestGuard
     },
 
     {
@@ -48,7 +48,9 @@ export default new Router({
     {
       path: "/create-product",
       name: "CreateProduct",
-      component: CreateProduct
+      component: CreateProduct,
+      beforeEnter: AuthGuard
+
     },
 
     {

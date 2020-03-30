@@ -7,25 +7,19 @@
           class="navbar-brand"
           v-if="isAdmin === 'Admin'"
           to="/create-product"
-          >Create Product</router-link
-        >
+        >Create Product</router-link>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link class="nav-link" to="/profile" v-if="isLogged">
-                <span class="material-icons">
-add_shopping_cart
-</span>
+                <i class="material-icons">account_circle</i>
+                Profile
               </router-link>
             </li>
+            
             <li class="nav-item">
-              <a
-                class="nav-link"
-                href="/login"
-                v-if="isLogged"
-                @click.prevent="onLogout"
-              >
+              <a class="nav-link" href="/login" v-if="isLogged" @click.prevent="onLogout">
                 Logout
                 <i class="material-icons">exit_to_app</i>
               </a>
@@ -46,8 +40,8 @@ add_shopping_cart
             <li>
               <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
+
                 Cart
-              
                 <span class="quantity">{{ quantity }}</span>
               </router-link>
             </li>
@@ -76,9 +70,7 @@ export default {
         return;
       }
       return this.$store.getters.user.roles;
-    },
-
-  
+    }
   },
 
   methods: {
