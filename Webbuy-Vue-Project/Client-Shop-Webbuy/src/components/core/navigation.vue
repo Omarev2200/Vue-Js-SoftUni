@@ -90,7 +90,7 @@ export default {
 </script>
 <style scoped>
 .navbar {
-  background-color: aqua;
+  background-color: #00ffff;
 }
 a {
   color: black;
