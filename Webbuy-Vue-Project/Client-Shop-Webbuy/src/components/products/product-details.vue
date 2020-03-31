@@ -82,7 +82,9 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
+     
       return this.$store.getters.user.roles;
+    
     },
     product() {
       return this.$store.getters.lodedProduct(this.id);

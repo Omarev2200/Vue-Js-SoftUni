@@ -9,7 +9,7 @@
           v-if="isAdmin === 'Admin'"
           to="/create-product"
         >Create Product</router-link>
-
+{{isAdmin}}
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -69,10 +69,8 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
-      if (!this.$store.getters.user.roles) {
-        return;
-      }
-      return this.$store.getters.user.roles[0];
+      
+      return this.$store.getters.user.roles;
     }
   },
 

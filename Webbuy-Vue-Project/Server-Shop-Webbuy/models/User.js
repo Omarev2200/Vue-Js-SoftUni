@@ -19,7 +19,7 @@ const userSchema = new Schema({
     require: true
   },
 
-  roles: [{ type: Schema.Types.String }],
+  roles: { type: String },
 
   posts: [{ type: ObjectId, ref: "Products" }]
 });
@@ -57,7 +57,7 @@ User.seedAdminUser = async () => {
     return User.create({
       email: "admin@abv.bg",
       password: 111111,
-      roles: ["Admin"],
+      roles: "Admin",
       posts: []
     });
   } catch (e) {

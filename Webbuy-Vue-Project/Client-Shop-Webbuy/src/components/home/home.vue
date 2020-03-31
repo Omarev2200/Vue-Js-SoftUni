@@ -34,7 +34,7 @@ export default {
 
   methods: {
     // this.$store.dispatch("getProducts", this.limit);
-    ...mapActions(["getProducts",'isAuth'])
+    ...mapActions(["getProducts",])
   },
   computed: {
     ...mapGetters(["lodedProducts"])
@@ -44,7 +44,7 @@ export default {
     // products() {
     //   return this.$store.getters.lodedProducts;
     // }
-    this.isAuth();
+    
     this.getProducts();
   }
 };
