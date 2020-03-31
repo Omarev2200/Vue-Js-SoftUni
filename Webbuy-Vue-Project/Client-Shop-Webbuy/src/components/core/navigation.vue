@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
         <router-link class="navbar-brand" to="/">WEBBUY</router-link>
+        
         <router-link
           class="navbar-brand"
           v-if="isAdmin === 'Admin'"
@@ -68,7 +69,10 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
-      return this.$store.getters.user.roles;
+      if (!this.$store.getters.user.roles) {
+        return;
+      }
+      return this.$store.getters.user.roles[0];
     }
   },
 

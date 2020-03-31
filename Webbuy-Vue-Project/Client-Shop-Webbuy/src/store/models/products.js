@@ -4,7 +4,7 @@ import axios from "axios";
 // initial state
 const state = {
   loadProducts: [],
-  loadProduct: null,
+  loadProduct: [],
   cart: []
 };
 

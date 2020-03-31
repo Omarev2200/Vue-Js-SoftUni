@@ -4,9 +4,9 @@ const { auth } = require('../utils');
 
  router.get('/', controllers.product.get);
 
-// router.get('/my-cars/:id', controllers.adCars.getAllMyAdCars);
+// router.get('/my-cars/:id', controllers.product.getAllMyProduct);
 
-// router.get('/search', controllers.adCars.search);
+// router.get('/search', controllers.product.search);
 
 
 
