@@ -23,9 +23,7 @@
 <script >
 export default {
   name: "ProductCard",
-
   props: ["product"],
-
   methods:{
     addToCart() {
       this.$store.dispatch('addProductToCart', {
@@ -43,10 +41,8 @@ export default {
   justify-content: space-between;
   margin-left: -40px;
 }
-
 .card-img-top {
   width: 252px;
   height: 220px;
 }
 </style>>
-

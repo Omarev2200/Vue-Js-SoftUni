@@ -45,6 +45,7 @@
                 v-if="isAdmin === 'Admin'"
                 @click="deliteProduct(product._id)"
               >DELETE</button>
+              
             </div>
           </div>
         </div>
@@ -54,6 +55,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: "Details",
   data() {
@@ -62,12 +65,10 @@ export default {
     };
   },
   methods: {
-    addToCart() {
-      this.$store.dispatch("addProductToCart", {
-        product: this.product,
-        quantity: 1
-      });
-    },
+    ...mapActions(['getProduct']),
+    // addToCart() {
+    //   this.$store.dispatch("addProductToCart");
+    // },
 
     editeProduct(id) {
       this.$store.dispatch("editeProduct", id);
@@ -87,8 +88,11 @@ export default {
     
     },
     product() {
-      return this.$store.getters.lodedProduct(this.id);
+      return this.$store.getters.lodedProduct;
     }
+  },
+  created() {
+    this.getProduct(this.id);
   }
 };
 </script>

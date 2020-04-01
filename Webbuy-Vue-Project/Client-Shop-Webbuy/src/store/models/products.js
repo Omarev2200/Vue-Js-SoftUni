@@ -30,7 +30,7 @@ const getters = {
   cartTotalPrice(state) {
     let total = 0;
     state.cart.forEach(item => {
-      total += item.product.price * item.quantity;
+      total += item.price * item.quantity;
     });
     return total;
   }
@@ -84,11 +84,25 @@ const actions = {
   },
 
   addProductToCart({ commit }, { product, quantity }) {
-    commit("addToCart", { product, quantity });
+    axios
+      .post("cart", {
+        brand: product.brand,
+        gender: product.gender,
+        price: product.price,
+        imigUrl: product.imigUrl,
+        size: product.size,
+        quantity
+      })
+      .then(res => {
+        commit("addToCart", res.data);
+      });
+  },
+  getCartItems({ commit }) {
+    axios.get("cart").then(res => {
+      commit("setCart", res.data);
+    });
   },
   deliteProduct({ commit }, payload) {
-    console.log(payload);
-
     axios.delete(`products/${payload}`).then(() => {
       router.push("/");
 
@@ -116,19 +130,16 @@ const mutations = {
   createProducts(state, payload) {
     state.loadProducts = payload;
   },
-  addToCart(state, { product, quantity }) {
-    let productInCart = state.cart.find(item => {
-      return item.product._id === product._id;
-    });
+  addToCart(state, product) {
+    // let productInCart = state.cart.find(item => {
+    //   return item._id === product._id;
+    // });
 
-    if (productInCart) {
-      productInCart.quantity += quantity;
-      return;
-    }
-    state.cart.push({
-      product,
-      quantity
-    });
+    // if (productInCart) {
+    //   productInCart.quantity += 1;
+    //   return;
+    // }
+    state.cart.push(product);
   },
   removeProductFromCart(state, product) {
     state.cart = state.cart.filter(item => {
@@ -139,6 +150,10 @@ const mutations = {
     state.cart = state.cart.filter(item => {
       return item.product._id !== payload;
     });
+  },
+
+  setCart(state, cartItems) {
+    state.cart = cartItems;
   }
 };
 

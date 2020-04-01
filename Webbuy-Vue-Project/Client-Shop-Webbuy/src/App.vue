@@ -25,7 +25,9 @@ export default {
   },
   created(){
     this.isAuth();
+    this.$store.dispatch("getCartItems");
   }
+  
 };
 </script>
 

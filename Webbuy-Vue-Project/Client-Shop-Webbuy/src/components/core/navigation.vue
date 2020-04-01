@@ -9,7 +9,7 @@
           v-if="isAdmin === 'Admin'"
           to="/create-product"
         >Create Product</router-link>
-{{isAdmin}}
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -42,7 +42,7 @@
               <router-link class="nav-link" to="/user/shoping-cart">
                 <i class="large material-icons">local_grocery_store</i>
                 Cart
-                <span class="quantity">{{ quantity }}</span>
+                <span class="quantity">{{ cartItemCount }}</span>
               </router-link>
             </li>
           </ul>
@@ -53,18 +53,19 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex";
+ import { mapGetters } from "vuex";
 export default {
   name: "Navigation",
 
   computed: {
-    quantity() {
-      return this.$store.getters.cartItemCount;
-    },
+    ...mapGetters(['cartItemCount']),
+    // quantity() {
+    //   return this.$store.getters.cartItemCount;
+    // },
     isLogged() {
       return !!this.$store.getters.user;
     },
-
+    
     isAdmin() {
       if (!this.$store.getters.user) {
         return;

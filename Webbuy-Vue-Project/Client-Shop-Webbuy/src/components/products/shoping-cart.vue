@@ -5,8 +5,7 @@
         <h1 class="jumbotron-heading">WEBBUY CART</h1>
       </div>
     </section>
-
-    <div class="container mb-4" v-if="cart.length>0">
+    <div class="container mb-4">
       <div class="row">
         <div class="col-12">
           <div class="table-responsive">
@@ -24,14 +23,14 @@
               <tbody>
                 <tr v-for="product in cart" :key="product.id">
                   <td>
-                    <img class="imige-cart" :src="product.product.imigUrl" />
+                    <img class="imige-cart" :src="product.imigUrl" />
                   </td>
-                  <td>{{product.product.brand}}</td>
-                  <td>{{product.product.size}}</td>
+                  <td>{{product.brand}}</td>
+                  <td>{{product.size}}</td>
                   <td>
                     <input class="form-control" type="text" :value="product.quantity" />
                   </td>
-                  <td class="text-right">{{product.product.price}} €</td>
+                  <td class="text-right">{{product.price}} €</td>
                   <td class="text-right">
                     <button
                       class="btn btn-sm btn-danger"
@@ -80,32 +79,39 @@
               <button class="btn btn-block btn-light">Continue Shopping</button>
             </div>
             <div class="col-sm-12 col-md-6 text-right">
-              <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+              <router-link  to="/" class="btn btn-lg btn-block btn-success text-uppercase">BACK</router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center" v-else>NO PRODUCT FOR YOR CART</div>
+    <div class="text-center" ></div>
+    
   </div>
 </template>
 
 <script>
+ import { mapGetters } from "vuex";
 export default {
   name: "ShopingCart",
   computed: {
+    // ...mapState(['cart']),
     cart() {
       return this.$store.getters.cart;
     },
-    cartTotalPrice() {
-      return this.$store.getters.cartTotalPrice;
-    }
+    ...mapGetters(['cartTotalPrice'])
+    // cartTotalPrice() {
+    //   return this.$store.getters.cartTotalPrice;
+    // }
   },
   methods: {
     removeProductFromCart(product) {
       this.$store.dispatch("removeProductFromCart", product);
     }
-  }
+  },
+  // mounted(){
+  //   this.$store.dispatch("getCartItems");
+  // }
 };
 </script>
 

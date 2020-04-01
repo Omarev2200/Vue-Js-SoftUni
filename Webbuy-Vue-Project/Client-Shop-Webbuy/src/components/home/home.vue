@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-      
     <div class="row">
       <Categories></Categories>
       <div class="col-lg-9">
@@ -23,8 +22,7 @@ export default {
   components: {
     // Slider,
     Productslist,
-    Categories,
-    
+    Categories
   },
   data() {
     return {
@@ -34,17 +32,13 @@ export default {
 
   methods: {
     // this.$store.dispatch("getProducts", this.limit);
-    ...mapActions(["getProducts",])
+    ...mapActions(["getProducts"])
   },
   computed: {
     ...mapGetters(["lodedProducts"])
   },
 
   created() {
-    // products() {
-    //   return this.$store.getters.lodedProducts;
-    // }
-    
     this.getProducts();
   }
 };
