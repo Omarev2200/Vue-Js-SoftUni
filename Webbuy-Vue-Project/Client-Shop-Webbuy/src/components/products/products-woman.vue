@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Productslist from "../products/products-list";
 import Categories from "../products/product-categories";
 
@@ -25,6 +25,9 @@ export default {
     Productslist,
     Categories
   },
+  methods:{
+    ...mapActions(['getProducts'])
+  },
   computed: {
     ...mapGetters(["lodedProducts"]),
     womanProducts() {
@@ -32,6 +35,9 @@ export default {
       
       return this.lodedProducts.filter(m => m.gender === "WOMAN");
     }
+  },
+  created() {
+    this.getProducts()
   }
 };
 </script>

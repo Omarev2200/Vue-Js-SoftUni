@@ -14,11 +14,7 @@ const getters = {
     return state.loadProducts;
   },
   lodedProduct(state) {
-    return id => {
-      return state.loadProducts.find(product => {
-        return product._id === id;
-      });
-    };
+    return state.loadProduct;
   },
   cart(state) {
     return state.cart;
@@ -38,8 +34,12 @@ const getters = {
 
 // actions
 const actions = {
-  removeProductFromCart({ commit }, product) {
-    commit("removeProductFromCart", product);
+  removeProductFromCart({ commit }, productId) {
+    
+    
+    axios.delete(`cart/${productId}`).then(() => {
+      commit("removeProductFromCart", productId);
+    });
   },
   createProduct({ commit }, payload) {
     const product = {
@@ -82,10 +82,19 @@ const actions = {
         commit("createProducts", res.data);
       });
   },
+  getProduct({ commit }, payload) {
+    axios
+      .get(`products/${payload}`)
+
+      .then(res => {
+        commit("createProduct", res.data);
+      });
+  },
 
   addProductToCart({ commit }, { product, quantity }) {
     axios
       .post("cart", {
+        id:product._id,
         brand: product.brand,
         gender: product.gender,
         price: product.price,
@@ -102,11 +111,14 @@ const actions = {
       commit("setCart", res.data);
     });
   },
-  deliteProduct({ commit }, payload) {
-    axios.delete(`products/${payload}`).then(() => {
+  deliteProduct({ commit }, productId) {
+    console.log(productId+ 'delete');
+    
+    axios.delete(`products/${productId}`).then(() => {
+      
       router.push("/");
 
-      commit("deliteProduct", payload);
+      commit("deliteProduct", productId);
     });
   },
   editProduct({ commit }, payload) {
@@ -130,6 +142,9 @@ const mutations = {
   createProducts(state, payload) {
     state.loadProducts = payload;
   },
+  createProduct(state, payload) {
+    state.loadProduct = payload;
+  },
   addToCart(state, product) {
     // let productInCart = state.cart.find(item => {
     //   return item._id === product._id;
@@ -141,14 +156,17 @@ const mutations = {
     // }
     state.cart.push(product);
   },
-  removeProductFromCart(state, product) {
+  removeProductFromCart(state, productId) {
+    console.log(productId+'cart delete');
+    
     state.cart = state.cart.filter(item => {
-      return item.product._id !== product._id;
+      return item.id !== productId;
     });
   },
-  deliteProduct(state, payload) {
+  deliteProduct(state, productId) {
+    console.log(productId+'cart delete');
     state.cart = state.cart.filter(item => {
-      return item.product._id !== payload;
+      return item._id !== productId;
     });
   },
 

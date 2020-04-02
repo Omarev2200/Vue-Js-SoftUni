@@ -4,7 +4,10 @@ const Model = mongoose.model;
 const { String, Number, Boolean, ObjectId } = Schema.Types;
 
 const cartSchema = new Schema({
-
+    id: {
+        type: ObjectId,
+        required: true,
+    },
     brand: {
         type: String,
         required: true,

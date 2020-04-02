@@ -22,6 +22,7 @@ export default {
   },
   methods:{
     ...mapActions(['isAuth'])
+    
   },
   created(){
     this.isAuth();

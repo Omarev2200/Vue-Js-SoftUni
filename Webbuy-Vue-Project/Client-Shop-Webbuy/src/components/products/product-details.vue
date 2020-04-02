@@ -27,7 +27,7 @@
               current price:
               <span>${{ product.price }}</span>
             </h4>
-            
+
             <h5 class="sizes">sizes: {{ product.size }}</h5>
 
             <div class="action-buttons">
@@ -45,7 +45,6 @@
                 v-if="isAdmin === 'Admin'"
                 @click="deliteProduct(product._id)"
               >DELETE</button>
-              
             </div>
           </div>
         </div>
@@ -55,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   name: "Details",
@@ -65,7 +64,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['getProduct']),
+    ...mapActions(["getProduct"]),
     // addToCart() {
     //   this.$store.dispatch("addProductToCart");
     // },
@@ -75,6 +74,7 @@ export default {
     },
 
     deliteProduct(id) {
+      this.$store.dispatch("removeProductFromCart", id);
       this.$store.dispatch("deliteProduct", id);
     }
   },
@@ -83,9 +83,8 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
-     
+
       return this.$store.getters.user.roles;
-    
     },
     product() {
       return this.$store.getters.lodedProduct;
@@ -315,10 +314,9 @@ button.btn {
     transform: scale(1);
   }
 }
-.btn.edit{
-      padding-right: 30px;
-    margin-right: 30px;
-
+.btn.edit {
+  padding-right: 30px;
+  margin-right: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */

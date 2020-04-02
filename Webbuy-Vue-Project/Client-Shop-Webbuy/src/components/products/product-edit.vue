@@ -203,7 +203,7 @@ export default {
   },
   computed: {
     product() {
-      return this.$store.getters.lodedProduct(this.id);
+      return this.$store.getters.lodedProduct;
     }
   }
 };

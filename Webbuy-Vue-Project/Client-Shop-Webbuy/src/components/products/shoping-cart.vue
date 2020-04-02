@@ -34,7 +34,7 @@
                   <td class="text-right">
                     <button
                       class="btn btn-sm btn-danger"
-                      @click.prevent="removeProductFromCart(product.product)"
+                      @click.prevent="removeProductFromCart(product._id)"
                     >
                       <span class="material-icons">delete_forever</span>
                     </button>
@@ -105,8 +105,8 @@ export default {
     // }
   },
   methods: {
-    removeProductFromCart(product) {
-      this.$store.dispatch("removeProductFromCart", product);
+    removeProductFromCart(productId) {
+      this.$store.dispatch("removeProductFromCart", productId);
     }
   },
   // mounted(){

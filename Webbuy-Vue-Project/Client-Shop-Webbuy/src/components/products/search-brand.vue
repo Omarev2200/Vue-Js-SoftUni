@@ -5,6 +5,7 @@
     <div class="faq-question"><router-link to="">Puma</router-link> </div>
     <div class="faq-question"><router-link to="">Under Armor</router-link> </div>
     <div class="faq-question"><router-link to="">Addidas</router-link> </div>
+    {{this.$route.params}}
   </div>
 </template>
 

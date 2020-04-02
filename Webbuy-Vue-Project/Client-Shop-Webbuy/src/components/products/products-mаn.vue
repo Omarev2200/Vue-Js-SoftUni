@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Productslist from "../products/products-list";
 import Categories from "../products/product-categories";
 
@@ -22,6 +22,10 @@ components:{
     Productslist,
     Categories
 },
+methods:{
+  ...mapActions(['getProducts']),
+
+},
 computed: {
     ...mapGetters(["lodedProducts"]),
     manProducts() {
@@ -29,6 +33,9 @@ computed: {
         
     }
   },
+  created() {
+    this.getProducts()
+  }
 }
 </script>
 
