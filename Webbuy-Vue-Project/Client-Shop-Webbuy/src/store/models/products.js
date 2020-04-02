@@ -35,8 +35,6 @@ const getters = {
 // actions
 const actions = {
   removeProductFromCart({ commit }, productId) {
-    
-    
     axios.delete(`cart/${productId}`).then(() => {
       commit("removeProductFromCart", productId);
     });
@@ -94,7 +92,7 @@ const actions = {
   addProductToCart({ commit }, { product, quantity }) {
     axios
       .post("cart", {
-        id:product._id,
+        id: product._id,
         brand: product.brand,
         gender: product.gender,
         price: product.price,
@@ -112,10 +110,9 @@ const actions = {
     });
   },
   deliteProduct({ commit }, productId) {
-    console.log(productId+ 'delete');
-    
+    console.log(productId + "delete");
+
     axios.delete(`products/${productId}`).then(() => {
-      
       router.push("/");
 
       commit("deliteProduct", productId);
@@ -157,14 +154,11 @@ const mutations = {
     state.cart.push(product);
   },
   removeProductFromCart(state, productId) {
-    console.log(productId+'cart delete');
-    
     state.cart = state.cart.filter(item => {
       return item.id !== productId;
     });
   },
   deliteProduct(state, productId) {
-    console.log(productId+'cart delete');
     state.cart = state.cart.filter(item => {
       return item._id !== productId;
     });

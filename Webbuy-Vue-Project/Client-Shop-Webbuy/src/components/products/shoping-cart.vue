@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="cart.length > 0">
     <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">WEBBUY CART</h1>
@@ -34,7 +34,7 @@
                   <td class="text-right">
                     <button
                       class="btn btn-sm btn-danger"
-                      @click.prevent="removeProductFromCart(product._id)"
+                      @click.prevent="removeProductFromCart(product.id)"
                     >
                       <span class="material-icons">delete_forever</span>
                     </button>
@@ -79,47 +79,37 @@
               <button class="btn btn-block btn-light">Continue Shopping</button>
             </div>
             <div class="col-sm-12 col-md-6 text-right">
-              <router-link  to="/" class="btn btn-lg btn-block btn-success text-uppercase">BACK</router-link>
+              <router-link to="/" class="btn btn-lg btn-block btn-success text-uppercase">BACK</router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center" ></div>
-    
+  </div>
+  <div class="text-center" v-else>
+    <h1>NO PRODUCTS FROM CART</h1>
   </div>
 </template>
 
 <script>
- import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "ShopingCart",
   computed: {
-    // ...mapState(['cart']),
     cart() {
       return this.$store.getters.cart;
     },
-    ...mapGetters(['cartTotalPrice'])
-    // cartTotalPrice() {
-    //   return this.$store.getters.cartTotalPrice;
-    // }
+    ...mapGetters(["cartTotalPrice"])
   },
   methods: {
     removeProductFromCart(productId) {
       this.$store.dispatch("removeProductFromCart", productId);
     }
-  },
-  // mounted(){
-  //   this.$store.dispatch("getCartItems");
-  // }
+  }
 };
 </script>
 
 <style scoped>
-/*
-** Style Simple Ecommerce Theme for Bootstrap 4
-** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
-*/
 .bloc_left_price {
   color: #c01508;
   text-align: center;

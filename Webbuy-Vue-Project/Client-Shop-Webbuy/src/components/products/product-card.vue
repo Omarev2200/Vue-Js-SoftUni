@@ -14,22 +14,45 @@
           <li>{{product.gender}}</li>
           <li>SIZE{{product.size}}</li>
         </ul>
-        <button type="button" class="btn btn-primary" @click='addToCart()' >ADD TO CART</button>
+        <div class="btns"></div>
+        <button type="button" class="btn btn-primary" @click="addToCart(product._id)">ADD TO CART</button>
+        <button type="button" class="btn btn-warning">Product is in the cart</button>
+        {{inCart}}
       </div>
     </div>
   </div>
 </template>
 
 <script >
+
 export default {
+  data() {
+    return {
+      id: null,
+      
+    };
+  },
   name: "ProductCard",
   props: ["product"],
-  methods:{
-    addToCart() {
-      this.$store.dispatch('addProductToCart', {
+  computed: {
+    cart() {
+      return this.$store.getters.cart;
+    },
+    inCart() {
+      return this.cart.forEach(item => {
+        console.log(item);
+        
+      });
+       
+    }
+  },
+  methods: {
+    addToCart(id) {
+      this.id = id;
+      this.$store.dispatch("addProductToCart", {
         product: this.product,
-        quantity:1
-      })
+        quantity: 1
+      });
     }
   }
 };
