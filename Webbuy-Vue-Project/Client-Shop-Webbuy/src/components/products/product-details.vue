@@ -31,7 +31,13 @@
             <h5 class="sizes">sizes: {{ product.size }}</h5>
 
             <div class="action-buttons">
-              <button type="button" class="btn btn-primary" @click="addToCart()">ADD TO CART</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                v-if="!inCart"
+                @click="addToCart(product._id)"
+              >ADD TO CART</button>
+              <button type="button" class="btn btn-warning" v-if="inCart">Product is in the cart</button>
               <router-link
                 type="button"
                 class="btn edit btn-warning"
@@ -65,9 +71,13 @@ export default {
   },
   methods: {
     ...mapActions(["getProduct"]),
-    // addToCart() {
-    //   this.$store.dispatch("addProductToCart");
-    // },
+
+    addToCart() {
+      this.$store.dispatch("addProductToCart", {
+        product: this.product,
+        quantity: 1
+      });
+    },
 
     editeProduct(id) {
       this.$store.dispatch("editeProduct", id);
@@ -79,6 +89,19 @@ export default {
     }
   },
   computed: {
+    cart() {
+      return this.$store.getters.cart;
+    },
+    inCart() {
+      let exists = false;
+      for (let k in this.cart) {
+        if (this.cart[k].id === this.id) {
+          exists = true;
+        }
+      }
+
+      return exists;
+    },
     isAdmin() {
       if (!this.$store.getters.user) {
         return;

@@ -14,22 +14,25 @@
           <li>{{product.gender}}</li>
           <li>SIZE{{product.size}}</li>
         </ul>
-        <div class="btns"></div>
-        <button type="button" class="btn btn-primary" @click="addToCart(product._id)">ADD TO CART</button>
-        <button type="button" class="btn btn-warning">Product is in the cart</button>
-        {{inCart}}
+       
+        <button
+          type="button"
+          class="btn btn-primary"
+          v-if="!inCart"
+          @click="addToCart(product._id)"
+        >ADD TO CART</button>
+        <button type="button" class="btn btn-warning" v-if="inCart">Product is in the cart</button>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script >
-
 export default {
   data() {
     return {
-      id: null,
-      
+      id: []
     };
   },
   name: "ProductCard",
@@ -39,16 +42,19 @@ export default {
       return this.$store.getters.cart;
     },
     inCart() {
-      return this.cart.forEach(item => {
-        console.log(item);
-        
-      });
-       
+      let exists = false;
+      for (let k in this.cart) {
+        if (this.cart[k].id === this.product._id) {
+            exists = true;
+          }
+      }
+
+      return exists;
     }
   },
   methods: {
     addToCart(id) {
-      this.id = id;
+      this.id.push(id);
       this.$store.dispatch("addProductToCart", {
         product: this.product,
         quantity: 1
