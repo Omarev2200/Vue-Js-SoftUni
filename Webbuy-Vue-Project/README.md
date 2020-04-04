@@ -26,6 +26,28 @@ npm run build
 ```
 npm run lint
 ```
+### Idea
+```
+Online sneaker shop.
+```
+## Public part
+* Anonymus user
+  * On landing page login provided.
+  * User has access to register page.
+  * User has access to login page.
+
+## Private part 
+*Admin can use email=admin@abv.bg and password=11111 for login.
+* Authorized user and admin
+  * User has access to his own profile page.
+  * User can buy the product.
+
+  * Admin can create a product.
+  * Admin can delite a product.
+  * Admin can edit a product.
+
+## Design
+* Responsive
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
