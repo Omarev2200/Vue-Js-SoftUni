@@ -32,12 +32,16 @@
 export default {
   data() {
     return {
-      id: []
+      id: [],
+      
     };
   },
   name: "ProductCard",
   props: ["product"],
   computed: {
+    auth(){
+      return !!this.$store.getters.user;
+    },
     cart() {
       return this.$store.getters.cart;
     },
@@ -54,6 +58,11 @@ export default {
   },
   methods: {
     addToCart(id) {
+      if (!this.auth) {
+        this.$router.push("/register");
+        return;
+        
+      }
       this.id.push(id);
       this.$store.dispatch("addProductToCart", {
         product: this.product,

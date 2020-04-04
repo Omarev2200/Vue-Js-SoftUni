@@ -6,7 +6,7 @@ const { auth } = require('../utils');
 
 // router.get('/my-cars/:id', controllers.product.getAllMyProduct);
 
-// router.get('/search', controllers.product.search);
+ router.get('/search', controllers.product.search);
 
 
 

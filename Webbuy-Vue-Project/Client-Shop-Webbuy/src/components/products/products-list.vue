@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-      
-    <ProductCard v-for="product in products" :key="product.id" :product="product"></ProductCard>
+      <h1  v-if="products.length === 0"> NO RESULT FOUND</h1>
+    <ProductCard v-else v-for="product in products" :key="product.id" :product="product"></ProductCard>
     
   </div>
 </template>

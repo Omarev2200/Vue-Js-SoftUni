@@ -30,6 +30,7 @@ export default {
   actions: {
     isAuth({ commit }) {
       axios.get("auth").then(res => {
+        
         commit("setUser", res.data);
       });
     },
@@ -82,26 +83,23 @@ export default {
           password: payload.password
         })
 
-        .then(response => {
+        .then((res) => {
           commit("setLoading", false);
+          console.log(res.data);
+        
+        const token = res.data.token
+        localStorage.setItem('user-token', token)
           Vue.notify({
             group: "auth",
             type: "success",
             title: "Success",
             text: "Login"
           });
-
-          const newUser = {
-            id: response.data._id,
-            email: response.data.email,
-            posts: response.data.posts,
-            roles: response.data.roles
-          };
-
-          commit("setUser", newUser);
+          router.push("/");
+          commit("setUser", res.data);
         })
         .catch(error => {
-          console.log(error);
+          
           Vue.notify({
             group: "auth",
             type: "error",
@@ -115,6 +113,7 @@ export default {
 
     logout({ commit }) {
       axios.post(`user/logout`).then(() => {
+        localStorage.removeItem('user-token')
         router.push("/login");
         Vue.notify({
           group: "auth",
@@ -125,6 +124,23 @@ export default {
       });
 
       commit("setUser", null);
+    },
+
+    deleteUser({commit}, payload){
+      axios.delete(`user/${payload}`).then(() =>{
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "Success",
+          text: "Delete User Profile"
+        });
+        router.push("/");
+        commit('setUser', null)
+      }).catch(err => {
+        console.log(err);
+        
+      }) 
+      
     },
 
     clearError({ commit }) {

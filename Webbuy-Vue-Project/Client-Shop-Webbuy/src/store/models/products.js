@@ -5,11 +5,13 @@ import axios from "axios";
 const state = {
   loadProducts: [],
   loadProduct: [],
-  cart: []
+  cart: [],
+ 
 };
 
 // getters
 const getters = {
+  
   lodedProducts(state) {
     return state.loadProducts;
   },
@@ -74,9 +76,6 @@ const actions = {
       .get(`products/${payload ? `?limit=${payload}` : ""}`)
 
       .then(res => {
-        // let test = data.filter(m => m.gender === "MAN");
-        // console.log(test);
-        // console.log(data);
         commit("createProducts", res.data);
       });
   },
@@ -101,6 +100,12 @@ const actions = {
         quantity
       })
       .then(res => {
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "Success",
+          text: "Add Product to Cart"
+        });
         commit("addToCart", res.data);
       });
   },
@@ -131,6 +136,13 @@ const actions = {
         router.push("/");
         commit("createProducts", res.data);
       });
+  },
+  getSearchProducts({commit}, payload) {
+    axios.get(`products/search?q=${payload}`).then(res =>{
+      console.log(res.data.articles);
+      
+      commit("createProducts", res.data.articles);
+    })
   }
 };
 
@@ -166,7 +178,8 @@ const mutations = {
 
   setCart(state, cartItems) {
     state.cart = cartItems;
-  }
+  },
+  
 };
 
 export default {

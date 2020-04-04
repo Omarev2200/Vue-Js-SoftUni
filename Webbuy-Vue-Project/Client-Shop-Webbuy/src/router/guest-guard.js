@@ -1,17 +1,13 @@
-import store from "../store";
-export default (to, from, next) => {
-  let isAuthenticated = true;
 
-    if (store.getters.user) {
-        isAuthenticated =false;
+export default (to, from, next) => {
+    const token = localStorage.getItem('user-token')
+   console.log(token);
+   
+    if (!token) {
+       next()
         
     }else{
-        isAuthenticated = true;
+        next('/')
     }
 
-    if(isAuthenticated) {
-        next(); // allow to enter route
-       } else{
-        next('/login'); // go to '/login';
-       }
 };

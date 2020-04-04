@@ -2,16 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Home from "../components/home/home";
-import Login from "../components/user/login";
-import Register from "../components/user/register";
-import Profile from "../components/user/profile";
-import CreateProduct from "../components/admin/create-product";
-import ProductDetails from "../components/products/product-details";
-import ProductEdit from "../components/products/product-edit.vue";
-import ShopingCard from "../components/products/shoping-cart";
-import ProductsMаn from '../components/products/products-mаn.vue';
-import ProductsWoman from '../components/products/products-woman.vue';
-import NotFound from "../components/not-found/not-found";
 import AuthGuard from "./auth-guard";
 import GuestGuard from "./guest-guard";
 
@@ -29,28 +19,29 @@ export default new Router({
     {
       path: "/login",
       name: "Login",
-      component: Login,
+      component:()=>import( /* webpackChunkName: "login" */'../components/user/login'),
       beforeEnter: GuestGuard
+      
     },
 
     {
       path: "/register",
       name: "Register",
-      component: Register,
+      component:()=>import( /* webpackChunkName: "register" */'../components/user/register'),
       beforeEnter: GuestGuard
     },
 
     {
-      path: "/profile",
+      path: "/profile/:id",
       name: "Profile",
-      component: Profile,
+      component:()=>import( /* webpackChunkName: "profile" */'../components/user/profile'),
       beforeEnter: AuthGuard
     },
 
     {
       path: "/create-product",
       name: "CreateProduct",
-      component: CreateProduct,
+      component:()=>import( /* webpackChunkName: "create-product" */'../components/admin/create-product'),
       beforeEnter: AuthGuard
 
     },
@@ -58,34 +49,34 @@ export default new Router({
     {
       path: "/details-product/:id",
       name: "ProductDetails",
-      component: ProductDetails
+      component:()=>import( /* webpackChunkName: "details-product" */'../components/products/product-details'),
     },
     {
       path: "/product-edit/:id",
       name: "ProductEdit",
-      component: ProductEdit
+      component:()=>import( /* webpackChunkName: "product-edit" */'../components/products/product-edit'),
     },
 
     {
       path: "/user/shoping-cart",
       name: "ShopingCard",
-      component: ShopingCard
+      component:()=>import( /* webpackChunkName: "shoping-cart" */'../components/products/shoping-cart'),
     },
     {
       path: "/products-mаn",
       name: "ProductsMаn",
-      component: ProductsMаn
+      component:()=>import( /* webpackChunkName: "products-mаn" */'../components/products/products-mаn.vue'),
     },
     {
       path: "/products-woman",
       name: "ProductsWoman",
-      component: ProductsWoman
+      component:()=>import( /* webpackChunkName: "products-woman" */'../components/products/products-woman.vue'),
     },
 
     {
       path: "*",
       name: "NotFound",
-      component: NotFound
+      component:()=>import( /* webpackChunkName: "NotFound" */'../components/not-found/not-found'),
     }
   ]
 });

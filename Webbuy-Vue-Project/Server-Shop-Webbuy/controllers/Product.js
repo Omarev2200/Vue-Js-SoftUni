@@ -70,10 +70,10 @@ getAllMyProduct: (req, res, next) => {
   search: (req, res) => {
     const query = req.query.q;
     
-    models.AdCars.find({ })
+    models.Products.find({ })
         .then((articles) => {
             const filteredArticles = articles.filter((a) => {
-                return a.model.toLowerCase().includes(query.toLowerCase());
+                return a.brand.toLowerCase().includes(query.toLowerCase());
             });
             const context = {
                 query: query,

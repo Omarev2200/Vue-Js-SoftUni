@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link class="nav-link" to="/profile" v-if="isLogged">
+              <router-link class="nav-link" :to='"/profile/"+ user._id' v-if="isLogged">
                 <i class="material-icons">account_circle</i>
                 Profile
               </router-link>
@@ -59,9 +59,9 @@ export default {
 
   computed: {
     ...mapGetters(['cartItemCount']),
-    // quantity() {
-    //   return this.$store.getters.cartItemCount;
-    // },
+   user() {
+      return this.$store.getters.user;
+    },
     isLogged() {
       return !!this.$store.getters.user;
     },

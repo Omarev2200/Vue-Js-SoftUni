@@ -73,6 +73,11 @@ export default {
     ...mapActions(["getProduct"]),
 
     addToCart() {
+      if (!this.auth) {
+        this.$router.push("/register");
+        return;
+        
+      }
       this.$store.dispatch("addProductToCart", {
         product: this.product,
         quantity: 1
@@ -89,6 +94,9 @@ export default {
     }
   },
   computed: {
+    auth(){
+      return !!this.$store.getters.user;
+    },
     cart() {
       return this.$store.getters.cart;
     },

@@ -49,5 +49,11 @@ Online sneaker shop.
 ## Design
 * Responsive
 
+## Functionality
+*Users
+  *Users cannot purchase a product unless it is registered.
+* Profile
+  * User can delete account.
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
