@@ -10,6 +10,12 @@
           to="/create-product"
         >Create Product</router-link>
 
+        <router-link
+          class="navbar-brand"
+          v-if="isAdmin === 'Admin'"
+          to="/all-orders"
+        >All Orders</router-link>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">

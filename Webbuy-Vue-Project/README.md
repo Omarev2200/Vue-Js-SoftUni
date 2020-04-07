@@ -37,7 +37,9 @@ Online sneaker shop.
   * User has access to login page.
 
 ## Private part 
+
 *Admin can use email=admin@abv.bg and password=11111 for login.
+
 * Authorized user and admin
   * User has access to his own profile page.
   * User can buy the product.
@@ -45,6 +47,7 @@ Online sneaker shop.
   * Admin can create a product.
   * Admin can delite a product.
   * Admin can edit a product.
+  * Admin can can view all orders placed.
 
 ## Design
 * Responsive

@@ -27,6 +27,7 @@
                   </td>
                   <td>{{product.brand}}</td>
                   <td>{{product.size}}</td>
+                  
                   <td>
                     <input class="form-control" type="text" :value="product.quantity" />
                   </td>
@@ -55,7 +56,7 @@
                   <td></td>
                   <td></td>
                   <td>Shipping</td>
-                  <td class="text-right">6,90 €</td>
+                  <td class="text-right">{{shipping}} €</td>
                 </tr>
                 <tr>
                   <td></td>
@@ -66,7 +67,7 @@
                     <strong>Total</strong>
                   </td>
                   <td class="text-right">
-                    <strong>{{cartTotalPrice+6.9}} €</strong>
+                    <strong>{{totalPrice}} €</strong>
                   </td>
                 </tr>
               </tbody>
@@ -75,27 +76,60 @@
         </div>
         <div class="col mb-2">
           <div class="row">
+            
             <div class="col-sm-12 col-md-6">
-              <button class="btn btn-block btn-light">Continue Shopping</button>
+            <ShoppingForm :order='cart'></ShoppingForm>
+              
             </div>
+         
             <div class="col-sm-12 col-md-6 text-right">
-              <router-link to="/" class="btn btn-lg btn-block btn-success text-uppercase">BACK</router-link>
+              <router-link to="/" class="btn btn-lg btn-block btn-primary text-uppercase">BACK</router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center" v-else>
-    <h1>NO PRODUCTS FROM CART</h1>
+  <div v-else>
+     <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="error-template">
+          
+         
+          <h1 class="error-details">NO PRODUCTS FROM CART</h1>
+          <div class="error-actions">
+            <router-link to="/" class="btn btn-primary btn-lg">
+              <span class="glyphicon glyphicon-home"></span>
+              Take Me Home
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
   </div>
 </template>
 
 <script>
+import ShoppingForm from '../products/shoppingForm';
 import { mapGetters } from "vuex";
 export default {
   name: "ShopingCart",
+  components: {
+    ShoppingForm
+  },
+
+  data() {
+    return {
+      shipping: 6.9
+    };
+  },
   computed: {
+    totalPrice() {
+      return this.shipping + this.cartTotalPrice;
+    },
     cart() {
       return this.$store.getters.cart;
     },
@@ -170,4 +204,12 @@ footer {
 footer a {
   color: #f8f9fa !important;
 }
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+
+.container {
+    padding-top: 5%;
+  }
 </style>

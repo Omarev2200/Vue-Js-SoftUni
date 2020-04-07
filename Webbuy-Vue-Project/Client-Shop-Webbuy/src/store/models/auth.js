@@ -8,7 +8,7 @@ export default {
     user: null,
     loading: false,
     error: null,
-    loadProducts: null
+    loadProducts: null,
   },
 
   // getters
@@ -23,14 +23,13 @@ export default {
 
     loading(state) {
       return state.loading;
-    }
+    },
   },
 
   // actions
   actions: {
     isAuth({ commit }) {
-      axios.get("auth").then(res => {
-        
+      axios.get("auth").then((res) => {
         commit("setUser", res.data);
       });
     },
@@ -40,17 +39,17 @@ export default {
       axios
         .post("user/register", {
           email: payload.email,
-          password: payload.password
+          password: payload.password,
         })
 
-        .then(res => {
+        .then((res) => {
           console.log(res.data.email);
 
           Vue.notify({
             group: "auth",
             type: "success",
             title: "Success",
-            text: "Register"
+            text: "Register",
           });
           router.push("/login");
           commit("setLoading", false);
@@ -62,49 +61,48 @@ export default {
           // };
           // commit("setUser", newUser);
         })
-        .catch(error => {
+        .catch((error) => {
           Vue.notify({
             group: "auth",
             type: "error",
             title: "Warnig",
-            text: error
+            text: error,
           });
           commit("setLoading", false);
           commit("setError", error);
         });
     },
 
-    loginUser({ commit }, payload) {
+    loginUser({ commit,dispatch }, payload) {
       commit("setLoading", true);
       commit("clearError");
       axios
         .post("user/login", {
           email: payload.email,
-          password: payload.password
+          password: payload.password,
         })
 
         .then((res) => {
           commit("setLoading", false);
-          console.log(res.data);
-        
-        const token = res.data.token
-        localStorage.setItem('user-token', token)
+          dispatch("isAuth");
+          const token = res.data.token;
+          localStorage.setItem("user-token", token);
           Vue.notify({
             group: "auth",
             type: "success",
             title: "Success",
-            text: "Login"
+            text: "Login",
           });
+
+          // commit("setUser", res.data.user);
           router.push("/");
-          commit("setUser", res.data);
         })
-        .catch(error => {
-          
+        .catch((error) => {
           Vue.notify({
             group: "auth",
             type: "error",
             title: "Warning",
-            text: "Invalid email or password"
+            text: "Invalid email or password",
           });
           commit("setLoading", false);
           commit("setError", error);
@@ -113,39 +111,40 @@ export default {
 
     logout({ commit }) {
       axios.post(`user/logout`).then(() => {
-        localStorage.removeItem('user-token')
+        localStorage.removeItem("user-token");
         router.push("/login");
         Vue.notify({
           group: "auth",
           type: "success",
           title: "Success",
-          text: "Logout"
+          text: "Logout",
         });
       });
 
       commit("setUser", null);
     },
 
-    deleteUser({commit}, payload){
-      axios.delete(`user/${payload}`).then(() =>{
-        Vue.notify({
-          group: "auth",
-          type: "success",
-          title: "Success",
-          text: "Delete User Profile"
+    deleteUser({ commit }, payload) {
+      axios
+        .delete(`user/${payload}`)
+        .then(() => {
+          Vue.notify({
+            group: "auth",
+            type: "success",
+            title: "Success",
+            text: "Delete User Profile",
+          });
+          router.push("/");
+          commit("setUser", null);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        router.push("/");
-        commit('setUser', null)
-      }).catch(err => {
-        console.log(err);
-        
-      }) 
-      
     },
 
     clearError({ commit }) {
       commit("clearError");
-    }
+    },
   },
 
   // mutations
@@ -163,6 +162,6 @@ export default {
     },
     clearError(state) {
       state.error = null;
-    }
-  }
+    },
+  },
 };

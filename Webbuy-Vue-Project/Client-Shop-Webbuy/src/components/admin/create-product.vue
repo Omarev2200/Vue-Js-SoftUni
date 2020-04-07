@@ -179,13 +179,6 @@ export default {
       this.gender = null;
       this.imigUrl = null;
       this.size = null;
-      // this.$store.dispatch("createProduct", {
-      //   brand: this.brand,
-      //   price: this.price,
-      //   gender: this.gender,
-      //   imigUrl: this.imigUrl,
-      //   size: this.size
-      // this.$router.push("/")
     },
 
     gedValue(e) {

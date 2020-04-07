@@ -6,12 +6,14 @@ const state = {
   loadProducts: [],
   loadProduct: [],
   cart: [],
- 
+  orders: [],
 };
 
 // getters
 const getters = {
-  
+  getOrders(state) {
+    return state.orders;
+  },
   lodedProducts(state) {
     return state.loadProducts;
   },
@@ -27,11 +29,11 @@ const getters = {
 
   cartTotalPrice(state) {
     let total = 0;
-    state.cart.forEach(item => {
+    state.cart.forEach((item) => {
       total += item.price * item.quantity;
     });
     return total;
-  }
+  },
 };
 
 // actions
@@ -47,7 +49,7 @@ const actions = {
       gender: payload.gender,
       price: payload.price,
       imigUrl: payload.imigUrl,
-      size: payload.size
+      size: payload.size,
     };
     axios
       .post("products", {
@@ -55,27 +57,26 @@ const actions = {
         gender: payload.gender,
         price: payload.price,
         imigUrl: payload.imigUrl,
-        size: payload.size
+        size: payload.size,
       })
       .then(() => {
         Vue.notify({
           group: "auth",
           type: "success",
           title: "Success",
-          text: "Create"
+          text: "Create",
         });
         router.push("/");
         commit("createProducts", {
-          ...product
+          ...product,
         });
       });
   },
-
   getProducts({ commit }, payload) {
     axios
       .get(`products/${payload ? `?limit=${payload}` : ""}`)
 
-      .then(res => {
+      .then((res) => {
         commit("createProducts", res.data);
       });
   },
@@ -83,11 +84,10 @@ const actions = {
     axios
       .get(`products/${payload}`)
 
-      .then(res => {
+      .then((res) => {
         commit("createProduct", res.data);
       });
   },
-
   addProductToCart({ commit }, { product, quantity }) {
     axios
       .post("cart", {
@@ -97,20 +97,20 @@ const actions = {
         price: product.price,
         imigUrl: product.imigUrl,
         size: product.size,
-        quantity
+        quantity,
       })
-      .then(res => {
+      .then((res) => {
         Vue.notify({
           group: "auth",
           type: "success",
           title: "Success",
-          text: "Add Product to Cart"
+          text: "Add Product to Cart",
         });
         commit("addToCart", res.data);
       });
   },
   getCartItems({ commit }) {
-    axios.get("cart").then(res => {
+    axios.get("cart").then((res) => {
       commit("setCart", res.data);
     });
   },
@@ -130,20 +130,53 @@ const actions = {
         gender: payload.gender,
         price: payload.price,
         imigUrl: payload.imigUrl,
-        size: payload.size
+        size: payload.size,
       })
-      .then(res => {
+      .then((res) => {
         router.push("/");
         commit("createProducts", res.data);
       });
   },
-  getSearchProducts({commit}, payload) {
-    axios.get(`products/search?q=${payload}`).then(res =>{
-      console.log(res.data.articles);
-      
+  getSearchProducts({ commit }, payload) {
+    axios.get(`products/search?q=${payload}`).then((res) => {
       commit("createProducts", res.data.articles);
-    })
-  }
+    });
+  },
+  sendOrder({ commit }, payload) {
+    axios
+      .post("orders", {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        phoneNumber: payload.phoneNumber,
+        products: payload.order,
+      })
+      .then(() => {
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "Success",
+          text: "The order was made",
+        });
+
+        commit("setOrders");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  clearCart({ commit }) {
+    axios.delete("cart").then(() => {
+      commit("clearCartOrders", []);
+      router.push("/order-completed");
+    });
+  },
+  loadOrders({ commit }) {
+    console.log("ddddd");
+
+    axios.get("orders").then((res) => {
+      commit("setOrders", res.data);
+    });
+  },
 };
 
 // mutations
@@ -155,23 +188,15 @@ const mutations = {
     state.loadProduct = payload;
   },
   addToCart(state, product) {
-    // let productInCart = state.cart.find(item => {
-    //   return item._id === product._id;
-    // });
-
-    // if (productInCart) {
-    //   productInCart.quantity += 1;
-    //   return;
-    // }
     state.cart.push(product);
   },
   removeProductFromCart(state, productId) {
-    state.cart = state.cart.filter(item => {
+    state.cart = state.cart.filter((item) => {
       return item.id !== productId;
     });
   },
   deliteProduct(state, productId) {
-    state.cart = state.cart.filter(item => {
+    state.cart = state.cart.filter((item) => {
       return item._id !== productId;
     });
   },
@@ -179,12 +204,20 @@ const mutations = {
   setCart(state, cartItems) {
     state.cart = cartItems;
   },
-  
+  setOrders(state, orders) {
+    state.orders = orders;
+  },
+  clearCartOrders(state) {
+    state.cart = [];
+  },
+  // setOrders(state, payload) {
+  //   state.orders=payload
+  // }
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

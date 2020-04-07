@@ -24,4 +24,11 @@ module.exports = {
           .then((removedCart) => res.send(removedCart))
           .catch(next)
       },
+
+      deleteAll: (req, res, next) => {
+        
+        models.Cart.remove({})
+          .then((removedCart) => res.send(removedCart))
+          .catch(next)
+      },
 };

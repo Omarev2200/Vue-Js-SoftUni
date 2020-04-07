@@ -54,7 +54,7 @@ export default new Router({
     {
       path: "/product-edit/:id",
       name: "ProductEdit",
-      component:()=>import( /* webpackChunkName: "product-edit" */'../components/products/product-edit'),
+      component:()=>import( /* webpackChunkName: "product-edit" */'../components/admin/product-edit'),
     },
 
     {
@@ -71,6 +71,16 @@ export default new Router({
       path: "/products-woman",
       name: "ProductsWoman",
       component:()=>import( /* webpackChunkName: "products-woman" */'../components/products/products-woman.vue'),
+    },
+
+    {
+      path: "/order-completed",
+      component:()=>import( /* webpackChunkName: "order-completed" */'../components/products/order-completed.vue'),
+    },
+
+    {
+      path: "/all-orders",
+      component:()=>import( /* webpackChunkName: "all-orders" */'../components/admin/all-orders.vue'),
     },
 
     {
