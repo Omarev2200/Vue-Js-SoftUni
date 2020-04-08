@@ -82,11 +82,11 @@ export default {
           password: payload.password,
         })
 
-        .then((res) => {
+        .then(() => {
           commit("setLoading", false);
           dispatch("isAuth");
-          const token = res.data.token;
-          localStorage.setItem("user-token", token);
+          // const token = res.data.token;
+          // localStorage.setItem("user-token", token);
           Vue.notify({
             group: "auth",
             type: "success",

@@ -171,10 +171,14 @@ const actions = {
     });
   },
   loadOrders({ commit }) {
-    console.log("ddddd");
-
     axios.get("orders").then((res) => {
       commit("setOrders", res.data);
+    });
+  },
+  removeOrder({ commit }, id) {
+    
+    axios.delete(`orders/${id}`).then(() => {
+      commit('deliteOrder', id)
     });
   },
 };
@@ -206,6 +210,11 @@ const mutations = {
   },
   setOrders(state, orders) {
     state.orders = orders;
+  },
+  deliteOrder(state, id) {
+    state.orders = state.orders.filter((item) => {
+      return item._id !== id;
+    });
   },
   clearCartOrders(state) {
     state.cart = [];

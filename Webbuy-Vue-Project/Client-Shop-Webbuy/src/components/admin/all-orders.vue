@@ -30,7 +30,7 @@
                   <td>
                     <img class="imige-cart" :src="product[0].imigUrl" />
                   </td>
-                  
+
                   <td>{{product[0].brand}}</td>
                   <td>{{product[0].size}}</td>
 
@@ -38,40 +38,7 @@
                     <input class="form-control" type="text" :value="product[0].quantity" />
                   </td>
                   <td class="text-right">{{product[0].price}} €</td>
-                  <td class="text-right">
-                    <button class="btn btn-sm btn-danger" @click.prevent="removeProductFromCart()">
-                      <span class="material-icons">delete_forever</span>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Sub-Total</td>
-                  <td class="text-right">11 €</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Shipping</td>
-                  <td class="text-right">22 €</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <strong>Total</strong>
-                  </td>
-                  <td class="text-right">
-                    <strong>33 €</strong>
-                  </td>
+                  <td class="text-right"></td>
                 </tr>
               </tbody>
             </table>
@@ -82,7 +49,13 @@
             <div class="col-sm-12 col-md-6"></div>
 
             <div class="col-sm-12 col-md-6 text-right">
-              <router-link to="/" class="btn btn-lg btn-block btn-primary text-uppercase">BACK</router-link>
+              <button
+                class="btn btn-lg btn-block btn-danger text-uppercase"
+                @click.prevent="removeOrders(item._id)"
+              >
+                DELETE
+                <span class="material-icons">delete_forever</span>
+              </button>
             </div>
           </div>
         </div>
@@ -98,7 +71,10 @@ export default {
     ...mapGetters(["getOrders"])
   },
   methods: {
-    ...mapActions(["loadOrders"])
+    ...mapActions(["loadOrders"]),
+    removeOrders(orderId) {
+      this.$store.dispatch("removeOrder", orderId);
+    }
   },
   created() {
     this.loadOrders();

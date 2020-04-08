@@ -20,8 +20,8 @@ module.exports = {
 
       delete: (req, res, next) => {
         const id = req.params.id;
-        models.Cart.deleteOne({ id: id })
-          .then((removedCart) => res.send(removedCart))
+        models.Orders.deleteOne({ _id: id })
+          .then((removeOrder) => res.send(removeOrder))
           .catch(next)
       },
 };
