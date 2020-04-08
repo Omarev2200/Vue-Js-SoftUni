@@ -1,6 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 import router from "../../router";
+
 axios.defaults.withCredentials = true;
 export default {
   // initial state
@@ -30,6 +31,7 @@ export default {
   actions: {
     isAuth({ commit }) {
       axios.get("auth").then((res) => {
+        
         commit("setUser", res.data);
       });
     },
@@ -73,7 +75,7 @@ export default {
         });
     },
 
-    loginUser({ commit,dispatch }, payload) {
+    loginUser({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
       axios
@@ -82,11 +84,11 @@ export default {
           password: payload.password,
         })
 
-        .then(() => {
+        .then((res) => {
           commit("setLoading", false);
-          dispatch("isAuth");
-          // const token = res.data.token;
-          // localStorage.setItem("user-token", token);
+          // dispatch("isAuth");
+          const token = res.data.token;
+          localStorage.setItem("user-token", token);
           Vue.notify({
             group: "auth",
             type: "success",
@@ -94,7 +96,7 @@ export default {
             text: "Login",
           });
 
-          // commit("setUser", res.data.user);
+          commit("setUser", res.data.user);
           router.push("/");
         })
         .catch((error) => {

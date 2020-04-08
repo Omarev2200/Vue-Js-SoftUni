@@ -3,17 +3,15 @@
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Webbuy 2020</p>
     </div>
-    <!-- /.container -->
   </footer>
 </template>
-<script >
+<script>
 export default {
-  name: "Footer"
+  name: "Footer",
 };
 </script>
 <style scoped>
 footer {
-
   background-color: aqua;
 }
 </style>

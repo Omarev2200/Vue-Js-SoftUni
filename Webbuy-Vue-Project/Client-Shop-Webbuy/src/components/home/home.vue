@@ -29,24 +29,24 @@ export default {
     // Slider,
     Productslist,
     Categories,
-    Loader
+    Loader,
   },
   data() {
     return {
-      limit: null
+      limit: null,
     };
   },
 
   methods: {
-    ...mapActions(["getProducts"])
+    ...mapActions(["getProducts"]),
   },
   computed: {
-    ...mapGetters(["lodedProducts"])
+    ...mapGetters(["lodedProducts"]),
   },
 
   created() {
     this.getProducts();
-  }
+  },
 };
 </script>
 
@@ -54,4 +54,5 @@ export default {
 .container {
   margin-top: 80px;
 }
-</style> >
+</style>
+>

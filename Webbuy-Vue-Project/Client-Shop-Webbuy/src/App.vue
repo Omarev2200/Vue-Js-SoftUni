@@ -12,7 +12,7 @@
 <script>
 import Navigation from "./components/core/navigation";
 import Footer from "./components/core/footer";
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -21,11 +21,11 @@ export default {
     Footer
   },
   methods:{
-    ...mapActions(['isAuth'])
+    // ...mapActions(['isAuth'])
     
   },
   created(){
-    this.isAuth();
+    // this.isAuth();
     this.$store.dispatch("getCartItems");
   }
   
@@ -38,6 +38,7 @@ export default {
 #app {
   padding-top: 56px;
   font-family: "Oswald", sans-serif;
+  background-color: azure;
 }
 .auth {
   margin-top: 70px;

@@ -1,5 +1,8 @@
 <template>
   <div class="conteiner">
+    
+    <div v-if="getOrders !== undefined">
+       <h1 v-if="getOrders.length === 0 "> NO ORDERS</h1>
     <div class="container mb-4" v-for="(item, i) in getOrders" :key="i">
       <div class="buyer-details">
         <h4>First Name:</h4>
@@ -11,7 +14,7 @@
         <h4>Phone:</h4>
         <h4 class="buyer-name">{{item.phoneNumber}}</h4>
       </div>
-      <div class="row">
+      <div class="row">undefined
         <div class="col-12">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -61,6 +64,8 @@
         </div>
       </div>
     </div>
+    </div>
+   
   </div>
 </template>
 

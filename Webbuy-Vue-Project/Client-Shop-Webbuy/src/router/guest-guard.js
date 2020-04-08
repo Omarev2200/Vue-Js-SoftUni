@@ -1,9 +1,8 @@
-import store from '../store'
+// import store from '../store'
 export default (to, from, next) => {
-  // const token = localStorage.getItem("user-token");
-console.log(store.getters.user);
+   const token = localStorage.getItem("user-token");
 
-  if (!store.getters.user) {
+  if (!token) {
     next();
   } else {
     next("/");

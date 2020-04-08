@@ -24,12 +24,16 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.email.required"
-                >Email is required!</div>
+                >
+                  Email is required!
+                </div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-else-if="!$v.email.email"
-                >Invalid email!</div>
+                >
+                  Invalid email!
+                </div>
               </template>
 
               <label for="inputPassword">Password</label>
@@ -52,17 +56,24 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.password.required"
-                >Password is required!</div>
+                >
+                  Password is required!
+                </div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-else-if="!$v.password.minLength"
-                >Password should be longer than 6 symbols!</div>
+                >
+                  Password should be longer than 6 symbols!
+                </div>
               </template>
 
               <br />
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" :disabled="$v.$invalid">
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                :disabled="$v.$invalid"
+              >
                 <span v-if="!loading">Login</span>
 
                 <div v-else>
@@ -70,6 +81,13 @@
                   <div class="spinner-border text-wait"></div>
                 </div>
               </button>
+              <div>
+                <p>
+                  Don't have an account?
+
+                  <router-link to="/register">Register</router-link>
+                </p>
+              </div>
             </form>
           </div>
         </div>
@@ -78,26 +96,26 @@
   </div>
 </template>
 
-<script >
+<script>
 // import { mapActions } from "vuex";
 import { validationMixin } from "vuelidate";
-import { required, email, minLength,  } from "vuelidate/lib/validators";
+import { required, email, minLength } from "vuelidate/lib/validators";
 export default {
   mixins: [validationMixin],
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
     };
   },
   validations: {
     email: {
       required,
-      email
+      email,
     },
     password: {
       required,
-      minLength: minLength(6)
+      minLength: minLength(6),
     },
   },
 
@@ -108,7 +126,7 @@ export default {
 
     loading() {
       return this.$store.getters.loading;
-    }
+    },
   },
 
   watch: {
@@ -116,19 +134,17 @@ export default {
       if (value !== null && value !== undefined) {
         this.$router.push("/");
       }
-    }
+    },
   },
 
   methods: {
     login() {
-      this.$store
-        .dispatch("loginUser", {
-          email: this.email,
-          password: this.password
-        })
-        
-    }
-  }
+      this.$store.dispatch("loginUser", {
+        email: this.email,
+        password: this.password,
+      });
+    },
+  },
 };
 </script>
 
@@ -145,4 +161,3 @@ export default {
   margin-left: 23px;
 }
 </style>
-

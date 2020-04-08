@@ -1,13 +1,17 @@
 import Vue from "vue";
 import App from "./App.vue";
+import VueRouter from "vue-router";
 import router from "./router";
 import axios from "axios";
-
 import store from "./store";
 import bootstrap from "./plugins/bootstrap.js";
 import notifications from "./plugins/notifications";
 import Capitalize from "./filters/capitalize";
-
+import { sync } from 'vuex-router-sync'
+sync(store, router);
+Vue.config.productionTip = false;
+Vue.use(VueRouter);
+Vue.filter("capitalize", Capitalize);
 const API_URL = "http://localhost:9999/api";
 
 axios.interceptors.request.use(
@@ -19,14 +23,17 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-Vue.config.productionTip = false;
 
-Vue.filter("capitalize", Capitalize);
-// store.dispatch('isAuth')
+
 new Vue({
-  router,
+  el: "#app",
   store,
   bootstrap,
   notifications,
-  render: h => h(App)
-}).$mount("#app");
+  router,
+  render: (h) => h(App),
+  created () {
+      this.$store.dispatch('isAuth')
+    
+  }
+});

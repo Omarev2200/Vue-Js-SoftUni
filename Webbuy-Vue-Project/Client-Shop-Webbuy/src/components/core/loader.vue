@@ -1,59 +1,74 @@
 <template>
-    <div class="container">
-	<div class="row text-center">
-	<div class = "centered">
-	<div class = "blob-1"></div>
-	<div class = "blob-2"></div>
-</div>
-	</div>
-</div>
+  <div class="container">
+    <div class="row text-center">
+      <div class="centered">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+      </div>
+    </div>
+  </div>
 </template>
-<script >
+<script>
 export default {
-    name:'Loader',
-}
+  name: "Loader",
+};
 </script>
 <style scoped>
-html,body{
-	background:#000;
-	margin:0;
+html,
+body {
+  background: #000;
+  margin: 0;
 }
-.centered{
-	width:300px;
-	height:100px;
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%,-50%);
-	background:#000;
-	filter: blur(10px) contrast(20);
+.centered {
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #000;
+  filter: blur(10px) contrast(20);
 }
-.blob-1,.blob-2{
-	width:70px;
-	height:70px;
-	position:absolute;
-	background:#fff;
-	border-radius:50%;
-	top:50%;left:50%;
-	transform:translate(-50%,-50%);
+.blob-1,
+.blob-2 {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.blob-1{
-	left:20%;
-	animation:osc-l 2.5s ease infinite;
+.blob-1 {
+  left: 20%;
+  animation: osc-l 2.5s ease infinite;
 }
-.blob-2{
-	left:80%;
-	animation:osc-r 2.5s ease infinite;
-	background:#0ff;
+.blob-2 {
+  left: 80%;
+  animation: osc-r 2.5s ease infinite;
+  background: #0ff;
 }
-@keyframes osc-l{
-	0%{left:20%;}
-	50%{left:50%;}
-	100%{left:20%;}
+@keyframes osc-l {
+  0% {
+    left: 20%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 20%;
+  }
 }
-@keyframes osc-r{
-	0%{left:80%;}
-	50%{left:50%;}
-	100%{left:80%;}
+@keyframes osc-r {
+  0% {
+    left: 80%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 80%;
+  }
 }
 </style>

@@ -1,13 +1,11 @@
-import Vue from "vue";
-import Router from "vue-router";
 
+import VueRouter from 'vue-router';
+// import store from '../store';
 import Home from "../components/home/home";
 import AuthGuard from "./auth-guard";
 import GuestGuard from "./guest-guard";
 
-Vue.use(Router);
-
-export default new Router({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     {
@@ -20,15 +18,14 @@ export default new Router({
       path: "/login",
       name: "Login",
       component:()=>import( /* webpackChunkName: "login" */'../components/user/login'),
-      beforeEnter: GuestGuard
-      
+      beforeEnter:GuestGuard
     },
 
     {
       path: "/register",
       name: "Register",
       component:()=>import( /* webpackChunkName: "register" */'../components/user/register'),
-      beforeEnter: GuestGuard
+      beforeEnter:GuestGuard
     },
 
     {
@@ -55,6 +52,7 @@ export default new Router({
       path: "/product-edit/:id",
       name: "ProductEdit",
       component:()=>import( /* webpackChunkName: "product-edit" */'../components/admin/product-edit'),
+      beforeEnter: AuthGuard
     },
 
     {
@@ -89,4 +87,15 @@ export default new Router({
       component:()=>import( /* webpackChunkName: "NotFound" */'../components/not-found/not-found'),
     }
   ]
-});
+
+})
+
+// router.beforeEach  ((to, from, next) => {
+//   console.log(store.getters.user);
+//   if (!store.getters.user) {
+//     next();
+//   } else {
+//     next("/");
+//   }
+// });
+export default router;

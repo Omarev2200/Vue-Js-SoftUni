@@ -23,12 +23,16 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.brand.required"
-                >Brand is required!</div>
+                >
+                  Brand is required!
+                </div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.brand.minLength"
-                >Brand lenght should be longer than 3 symbols!</div>
+                >
+                  Brand lenght should be longer than 3 symbols!
+                </div>
               </template>
 
               <label for="gender">Gender</label>
@@ -49,7 +53,9 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.gender.required"
-                >Gender is required!</div>
+                >
+                  Gender is required!
+                </div>
               </template>
 
               <label for="inputEmail">Praice</label>
@@ -69,12 +75,16 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.price.required"
-                >Price is required!</div>
+                >
+                  Price is required!
+                </div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.price.numeric"
-                >The price must be a number!</div>
+                >
+                  The price must be a number!
+                </div>
               </template>
 
               <label for="inputEmail">Imige</label>
@@ -94,8 +104,16 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.imigUrl.required"
-                >Imige is required!</div>
-                <div class="alert alert-danger" role="alert" v-if="!$v.imigUrl.url">Url not match!</div>
+                >
+                  Imige is required!
+                </div>
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  v-if="!$v.imigUrl.url"
+                >
+                  Url not match!
+                </div>
               </template>
               <img class="imig" :src="imigUrl" alt />
               <br />
@@ -116,14 +134,18 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.size.required"
-                >Size is required!</div>
+                >
+                  Size is required!
+                </div>
               </template>
               <br />
               <button
                 class="btn btn-lg btn-primary btn-block text-uppercase"
                 type="submit"
                 :disabled="$v.$invalid"
-              >Edit Product</button>
+              >
+                Edit Product
+              </button>
             </form>
           </div>
         </div>
@@ -145,30 +167,29 @@ export default {
       gender: "",
       imigUrl: "",
       size: "",
-      id: this.$route.params.id
+      id: this.$route.params.id,
     };
   },
   validations: {
     brand: {
       required,
-      minLength: minLength(3)
+      minLength: minLength(3),
     },
     gender: {
-      required
+      required,
     },
     price: {
       required,
-      numeric
+      numeric,
     },
     imigUrl: {
       required,
-      url
+      url,
     },
     size: {
-      required
-    }
+      required,
+    },
   },
-  create() {},
 
   methods: {
     onCreateProduct() {
@@ -178,7 +199,7 @@ export default {
         gender: this.gender,
         imigUrl: this.imigUrl,
         size: this.size,
-        id: this.id
+        id: this.id,
       });
     },
     inputBrand(e) {
@@ -199,13 +220,13 @@ export default {
         this.gender =
           e.target.options[e.target.options.selectedIndex].textContent;
       }
-    }
+    },
   },
   computed: {
     product() {
       return this.$store.getters.lodedProduct;
-    }
-  }
+    },
+  },
 };
 </script>
 

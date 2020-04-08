@@ -88,16 +88,18 @@ const actions = {
         commit("createProduct", res.data);
       });
   },
-  addProductToCart({ commit }, { product, quantity }) {
+  addProductToCart({ commit }, payload) {
+    console.log(payload);
+    
     axios
       .post("cart", {
-        id: product._id,
-        brand: product.brand,
-        gender: product.gender,
-        price: product.price,
-        imigUrl: product.imigUrl,
-        size: product.size,
-        quantity,
+        id: payload.id,
+        brand: payload.brand,
+        gender: payload.gender,
+        price: payload.price,
+        imigUrl: payload.imigUrl,
+        size: payload.size,
+        quantity:payload.quantity,
       })
       .then((res) => {
         Vue.notify({
@@ -118,6 +120,12 @@ const actions = {
     console.log(productId + "delete");
 
     axios.delete(`products/${productId}`).then(() => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "Success",
+        text: "Delete Product",
+      });
       router.push("/");
 
       commit("deliteProduct", productId);
@@ -133,6 +141,12 @@ const actions = {
         size: payload.size,
       })
       .then((res) => {
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "Success",
+          text: "Edit Product",
+        });
         router.push("/");
         commit("createProducts", res.data);
       });

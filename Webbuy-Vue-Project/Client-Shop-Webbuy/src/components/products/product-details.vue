@@ -79,8 +79,13 @@ export default {
         
       }
       this.$store.dispatch("addProductToCart", {
-        product: this.product,
-        quantity: 1
+        id: this.product._id,
+        brand: this.product.brand,
+        imigUrl: this.product.imigUrl,
+        price: this.product.price,
+        size: this.product.size,
+        gender: this.product.gender,
+        quantity: 1,
       });
     },
 
