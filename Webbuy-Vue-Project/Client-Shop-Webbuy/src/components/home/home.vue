@@ -5,9 +5,9 @@
         <Categories></Categories>
         <div class="col-lg-9">
           <!-- <Slider /> -->
-          <div v-if="lodedProducts.length === 0">
+          <!-- <div v-if="lodedProducts.length === 0">
             <Loader></Loader>
-          </div>
+          </div> -->
           <div v-if="!lodedProducts">No Products</div>
           <Productslist :products="lodedProducts"></Productslist>
         </div>

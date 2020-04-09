@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-      <h1  v-if="products.length === 0"> NO RESULT FOUND</h1>
+      <h1  v-if="!productLength"> NO RESULT FOUND</h1>
     <ProductCard v-else v-for="product in products" :key="product.id" 
     :_id="product._id"
     :brand="product.brand"
@@ -21,6 +21,14 @@ export default {
 
   components: {
     ProductCard
+  },
+  computed:{
+    productLength() {
+      if (this.products.length !== 0) {
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>

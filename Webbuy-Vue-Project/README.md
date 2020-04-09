@@ -49,8 +49,7 @@ Online sneaker shop.
   * Admin can edit a product.
   * Admin can can view all orders placed.
 
-## Design
-* Responsive
+
 
 ## Functionality
 *Users

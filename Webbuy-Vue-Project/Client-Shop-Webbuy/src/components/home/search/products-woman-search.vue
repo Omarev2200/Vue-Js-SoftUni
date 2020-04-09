@@ -17,8 +17,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Productslist from "../products/products-list";
-import Categories from "../products/product-categories";
+import Productslist from "../../products/products-list";
+import Categories from "../../products/product-categories";
 
 export default {
   components: {

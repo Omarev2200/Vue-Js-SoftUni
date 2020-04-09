@@ -61,14 +61,14 @@ const router = new VueRouter({
       component:()=>import( /* webpackChunkName: "shoping-cart" */'../components/products/shoping-cart'),
     },
     {
-      path: "/products-mаn",
+      path: "/products-mаn-search",
       name: "ProductsMаn",
-      component:()=>import( /* webpackChunkName: "products-mаn" */'../components/products/products-mаn.vue'),
+      component:()=>import( /* webpackChunkName: "products-mаn-search" */'../components/home/search/products-mаn-search.vue'),
     },
     {
-      path: "/products-woman",
+      path: "/products-woman-search",
       name: "ProductsWoman",
-      component:()=>import( /* webpackChunkName: "products-woman" */'../components/products/products-woman.vue'),
+      component:()=>import( /* webpackChunkName: "products-woman-search" */'../components/home/search/products-woman-search.vue'),
     },
 
     {

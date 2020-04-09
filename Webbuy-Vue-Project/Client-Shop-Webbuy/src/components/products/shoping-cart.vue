@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cart.length > 0">
+  <div v-if="cartlength">
     <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">WEBBUY CART</h1>
@@ -27,7 +27,7 @@
                   </td>
                   <td>{{product.brand}}</td>
                   <td>{{product.size}}</td>
-                  
+
                   <td>
                     <input class="form-control" type="text" :value="product.quantity" />
                   </td>
@@ -76,12 +76,10 @@
         </div>
         <div class="col mb-2">
           <div class="row">
-            
             <div class="col-sm-12 col-md-6">
-            <ShoppingForm :order='cart'></ShoppingForm>
-              
+              <ShoppingForm :order="cart"></ShoppingForm>
             </div>
-         
+
             <div class="col-sm-12 col-md-6 text-right">
               <router-link to="/" class="btn btn-lg btn-block btn-primary text-uppercase">BACK</router-link>
             </div>
@@ -91,29 +89,26 @@
     </div>
   </div>
   <div v-else>
-     <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="error-template">
-          
-         
-          <h1 class="error-details">NO PRODUCTS FROM CART</h1>
-          <div class="error-actions">
-            <router-link to="/" class="btn btn-primary btn-lg">
-              <span class="glyphicon glyphicon-home"></span>
-              Take Me Home
-            </router-link>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="error-template">
+            <h1 class="error-details">NO PRODUCTS FROM CART</h1>
+            <div class="error-actions">
+              <router-link to="/" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-home"></span>
+                Take Me Home
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-    
-  </div>
 </template>
 
 <script>
-import ShoppingForm from '../products/shoppingForm';
+import ShoppingForm from "../products/shoppingForm";
 import { mapGetters } from "vuex";
 export default {
   name: "ShopingCart",
@@ -127,6 +122,12 @@ export default {
     };
   },
   computed: {
+    cartlength() {
+      if (this.cart.length > 0) {
+        return true;
+      }
+      return false;
+    },
     totalPrice() {
       return this.shipping + this.cartTotalPrice;
     },
@@ -205,11 +206,19 @@ footer a {
   color: #f8f9fa !important;
 }
 
-.error-template {padding: 40px 15px;text-align: center;}
-.error-actions {margin-top:15px;margin-bottom:15px;}
-.error-actions .btn { margin-right:10px; }
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.error-actions {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.error-actions .btn {
+  margin-right: 10px;
+}
 
 .container {
-    padding-top: 5%;
-  }
+  padding-top: 5%;
+}
 </style>

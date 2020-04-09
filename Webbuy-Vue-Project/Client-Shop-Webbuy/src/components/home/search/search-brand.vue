@@ -12,14 +12,7 @@
           />
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-      </div>
-
-      <!-- <div class="col-lg-9">
-        <div class="no-products" v-if="!lodedProducts">
-          <h1>No Products</h1>
-        </div>
-        <Productslist :products="lodedProducts"></Productslist>
-      </div> -->
+      </div> 
     </div>
   </div>
 </template>
