@@ -5,16 +5,15 @@
       <div class="container mb-4" v-for="(item, i) in getOrders" :key="i">
         <div class="buyer-details">
           <h4>First Name:</h4>
-          <h4 class="buyer-name">{{item.firstName}}</h4>
+          <h4 class="buyer-name">{{item.firstName | capitalize}}</h4>
 
           <h4>Last Name:</h4>
-          <h4 class="buyer-name">{{item.lastName}}</h4>
+          <h4 class="buyer-name">{{item.lastName | capitalize}}</h4>
 
           <h4>Phone:</h4>
           <h4 class="buyer-name">{{item.phoneNumber}}</h4>
         </div>
         <div class="row">
-          undefined
           <div class="col-12">
             <div class="table-responsive">
               <table class="table table-striped">
@@ -74,8 +73,10 @@ export default {
   computed: {
     ...mapGetters(["getOrders"]),
     ordersLength() {
-      if (this.getOrders.length !== 0) {
-        return true;
+      if (this.getOrders !== undefined) {
+        if (this.getOrders.length !== 0) {
+          return true;
+        }
       }
       return false;
     }

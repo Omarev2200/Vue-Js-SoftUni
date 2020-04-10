@@ -7,7 +7,7 @@ import store from "./store";
 import bootstrap from "./plugins/bootstrap.js";
 import notifications from "./plugins/notifications";
 import Capitalize from "./filters/capitalize";
-import { sync } from 'vuex-router-sync'
+import { sync } from "vuex-router-sync";
 sync(store, router);
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -24,7 +24,6 @@ axios.interceptors.request.use(
   }
 );
 
-
 new Vue({
   el: "#app",
   store,
@@ -32,8 +31,7 @@ new Vue({
   notifications,
   router,
   render: (h) => h(App),
-  created () {
-      this.$store.dispatch('isAuth')
-    
-  }
+  created() {
+    this.$store.dispatch("isAuth");
+  },
 });

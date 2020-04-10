@@ -31,7 +31,6 @@ export default {
   actions: {
     isAuth({ commit }) {
       axios.get("auth").then((res) => {
-        
         commit("setUser", res.data);
       });
     },
@@ -50,8 +49,8 @@ export default {
           Vue.notify({
             group: "auth",
             type: "success",
-            title: "Success",
-            text: "Register",
+            title: "Register",
+            text: "Success",
           });
           router.push("/login");
           commit("setLoading", false);
@@ -92,49 +91,53 @@ export default {
           Vue.notify({
             group: "auth",
             type: "success",
-            title: "Success",
-            text: "Login",
+            title: "Login",
+            text: "Success",
           });
 
           commit("setUser", res.data.user);
           router.push("/");
         })
         .catch((error) => {
+          console.log(error);
+
           Vue.notify({
             group: "auth",
             type: "error",
-            title: "Warning",
-            text: "Invalid email or password",
+            title: "Invalid email or password",
+            text: "Warning",
           });
           commit("setLoading", false);
           commit("setError", error);
         });
     },
 
-    logout({ commit }) {
+    logout({ commit, dispatch }) {
       axios.post(`user/logout`).then(() => {
         localStorage.removeItem("user-token");
+        dispatch("clearCart");
         router.push("/login");
         Vue.notify({
           group: "auth",
           type: "success",
-          title: "Success",
-          text: "Logout",
+          title: "Logout",
+          text: "Success",
         });
       });
 
       commit("setUser", null);
     },
 
-    deleteUser({ commit }, payload) {
+    deleteUser({ commit, dispatch }, payload) {
       axios
         .delete(`user/${payload}`)
         .then(() => {
+          dispatch("logout");
           Vue.notify({
             group: "auth",
             type: "success",
-            title: "Success",
-            text: "Delete User Profile",
+            title: "Delete User Profile",
+            text: "Success",
           });
           router.push("/");
           commit("setUser", null);

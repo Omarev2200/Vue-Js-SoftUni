@@ -14,13 +14,13 @@
           <div class="details col-md-6">
             <h3 class="product-title">{{ product.brand }}</h3>
             <div class="rating">
-              <div class="stars">
+              <!-- <div class="stars">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
-              </div>
+              </div>-->
             </div>
 
             <h4 class="price">
@@ -41,14 +41,14 @@
               <router-link
                 type="button"
                 class="btn edit btn-warning"
-                v-if="isAdmin === 'Admin'"
+                v-if="isAdmin"
                 :to="'/product-edit/' + product._id"
                 @click="editeProduct(product._id)"
               >EDIT</router-link>
               <button
                 type="button"
                 class="btn btn-danger"
-                v-if="isAdmin === 'Admin'"
+                v-if="isAdmin"
                 @click="deliteProduct(product._id)"
               >DELETE</button>
             </div>
@@ -76,7 +76,6 @@ export default {
       if (!this.auth) {
         this.$router.push("/register");
         return;
-        
       }
       this.$store.dispatch("addProductToCart", {
         id: this.product._id,
@@ -85,7 +84,7 @@ export default {
         price: this.product.price,
         size: this.product.size,
         gender: this.product.gender,
-        quantity: 1,
+        quantity: 1
       });
     },
 
@@ -99,7 +98,7 @@ export default {
     }
   },
   computed: {
-    auth(){
+    auth() {
       return !!this.$store.getters.user;
     },
     cart() {
@@ -119,8 +118,10 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
-
-      return this.$store.getters.user.roles;
+      if (this.$store.getters.user.roles === "Admin") {
+        return true;
+      }
+      return false;
     },
     product() {
       return this.$store.getters.lodedProduct;

@@ -33,7 +33,6 @@
               <label for="gender">Gender</label>
               <select
                 class="form-control btn-primary"
-                
                 name="gender"
                 @blur="$v.gender.$touch"
                 @change="gedValue($event)"

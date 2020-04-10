@@ -1,5 +1,5 @@
 export default (value) => {
-    return value.forEach(v =>{
-        v[0].toUpperCase() + v.substring(1).toLowerCase();
-    }) 
+    return value[0].toUpperCase() + value.substring(1).toLowerCase();
+        
+
 }

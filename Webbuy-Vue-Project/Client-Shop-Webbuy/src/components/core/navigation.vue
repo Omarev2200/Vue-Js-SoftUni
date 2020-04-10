@@ -4,40 +4,21 @@
       <div class="container">
         <router-link class="navbar-brand" to="/">WEBBUY</router-link>
 
-        <router-link
-          class="navbar-brand"
-          v-if="isAdmin === 'Admin'"
-          to="/create-product"
-          >Create Product</router-link
-        >
+        <router-link class="navbar-brand" v-if="isAdmin" to="/create-product">Create Product</router-link>
 
-        <router-link
-          class="navbar-brand"
-          v-if="isAdmin === 'Admin'"
-          to="/all-orders"
-          >All Orders</router-link
-        >
+        <router-link class="navbar-brand" v-if="isAdmin" to="/all-orders">All Orders</router-link>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link
-                class="nav-link"
-                :to="'/profile/' + user._id"
-                v-if="isLogged"
-              >
+              <router-link class="nav-link" :to="'/profile/' + user._id" v-if="isLogged">
                 <i class="material-icons">account_circle</i>
                 Profile
               </router-link>
             </li>
 
             <li class="nav-item">
-              <a
-                class="nav-link"
-                href="/login"
-                v-if="isLogged"
-                @click.prevent="onLogout"
-              >
+              <a class="nav-link" href="/login" v-if="isLogged" @click.prevent="onLogout">
                 Logout
                 <i class="material-icons">exit_to_app</i>
               </a>
@@ -87,16 +68,18 @@ export default {
       if (!this.$store.getters.user) {
         return;
       }
-
-      return this.$store.getters.user.roles;
-    },
+      if (this.$store.getters.user.roles === "Admin") {
+        return true;
+      }
+      return false;
+    }
   },
 
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

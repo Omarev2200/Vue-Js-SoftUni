@@ -9,10 +9,10 @@
             Sorry, an error has occured, Requested page not found!
           </div>
           <div class="error-actions">
-            <a href="/" class="btn btn-primary btn-lg">
+            <router-link to="/" class="btn btn-primary btn-lg">
               <span class="glyphicon glyphicon-home"></span>
               Take Me Home
-            </a>
+            </router-link>
           </div>
         </div>
       </div>

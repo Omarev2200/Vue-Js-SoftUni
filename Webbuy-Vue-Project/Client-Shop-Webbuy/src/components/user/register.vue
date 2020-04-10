@@ -6,10 +6,7 @@
           <div class="card-body">
             <h5 class="card-title text-center">Register</h5>
             <form class="form-register" @submit.prevent="register">
-              <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.password.$error }"
-              >
+              <div class="form-group" :class="{ 'form-group--error': $v.password.$error }">
                 <label for="form-group">Email address</label>
                 <div class="form-label-group">
                   <i class="material-icons">email</i>
@@ -28,16 +25,12 @@
                     class="alert alert-danger"
                     role="alert"
                     v-if="!$v.email.required"
-                  >
-                    Email is required!
-                  </div>
+                  >Email is required!</div>
                   <div
                     class="alert alert-danger"
                     role="alert"
                     v-else-if="!$v.email.email"
-                  >
-                    Invalid email!
-                  </div>
+                  >Invalid email!</div>
                 </template>
               </div>
 
@@ -61,16 +54,12 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.password.required"
-                >
-                  Password is required!
-                </div>
+                >Password is required!</div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-else-if="!$v.password.minLength"
-                >
-                  Password should be longer than 6 symbols!
-                </div>
+                >Password should be longer than 6 symbols!</div>
               </template>
               <label for="cPassword">Confirm Password</label>
               <div class="form-label-group">
@@ -92,9 +81,7 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.cPassword.sameAs"
-                >
-                  Passwords don't match!
-                </div>
+                >Passwords don't match!</div>
               </template>
               <br />
               <button
@@ -111,7 +98,6 @@
               <div>
                 <p>
                   You already have an account?
-
                   <router-link to="/login">Login</router-link>
                 </p>
               </div>
@@ -132,21 +118,21 @@ export default {
     return {
       email: "",
       password: "",
-      cPassword: "",
+      cPassword: ""
     };
   },
   validations: {
     email: {
       required,
-      email,
+      email
     },
     password: {
       required,
-      minLength: minLength(6),
+      minLength: minLength(6)
     },
     cPassword: {
-      sameAs: sameAs("password"),
-    },
+      sameAs: sameAs("password")
+    }
   },
 
   computed: {
@@ -156,7 +142,7 @@ export default {
 
     loading() {
       return this.$store.getters.loading;
-    },
+    }
   },
 
   watch: {
@@ -164,17 +150,17 @@ export default {
       if (value !== null && value !== undefined) {
         this.$router.push("/");
       }
-    },
+    }
   },
 
   methods: {
     register() {
       this.$store.dispatch("registerUser", {
         email: this.email,
-        password: this.password,
+        password: this.password
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -64,7 +64,7 @@ const actions = {
           group: "auth",
           type: "success",
           title: "Success",
-          text: "Create",
+          text: "Success",
         });
         router.push("/");
         commit("createProducts", {
@@ -89,8 +89,6 @@ const actions = {
       });
   },
   addProductToCart({ commit }, payload) {
-    console.log(payload);
-    
     axios
       .post("cart", {
         id: payload.id,
@@ -99,14 +97,14 @@ const actions = {
         price: payload.price,
         imigUrl: payload.imigUrl,
         size: payload.size,
-        quantity:payload.quantity,
+        quantity: payload.quantity,
       })
       .then((res) => {
         Vue.notify({
           group: "auth",
           type: "success",
-          title: "Success",
-          text: "Add Product to Cart",
+          title: "Add Product to Cart",
+          text: "Success",
         });
         commit("addToCart", res.data);
       });
@@ -117,14 +115,12 @@ const actions = {
     });
   },
   deliteProduct({ commit }, productId) {
-    console.log(productId + "delete");
-
     axios.delete(`products/${productId}`).then(() => {
       Vue.notify({
         group: "auth",
         type: "success",
-        title: "Success",
-        text: "Delete Product",
+        title: "Delete Product",
+        text: "Success",
       });
       router.push("/");
 
@@ -144,8 +140,8 @@ const actions = {
         Vue.notify({
           group: "auth",
           type: "success",
-          title: "Success",
-          text: "Edit Product",
+          title: "Edit Product",
+          text: "Success",
         });
         router.push("/");
         commit("createProducts", res.data);
@@ -168,8 +164,8 @@ const actions = {
         Vue.notify({
           group: "auth",
           type: "success",
-          title: "Success",
-          text: "The order was made",
+          title: "The order was made",
+          text: "Success",
         });
 
         commit("setOrders");
@@ -190,9 +186,8 @@ const actions = {
     });
   },
   removeOrder({ commit }, id) {
-    
     axios.delete(`orders/${id}`).then(() => {
-      commit('deliteOrder', id)
+      commit("deliteOrder", id);
     });
   },
 };

@@ -12,7 +12,6 @@
 <script>
 import Navigation from "./components/core/navigation";
 import Footer from "./components/core/footer";
-// import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -20,15 +19,10 @@ export default {
     Navigation,
     Footer
   },
-  methods:{
-    // ...mapActions(['isAuth'])
-    
-  },
-  created(){
-    // this.isAuth();
+  methods: {},
+  created() {
     this.$store.dispatch("getCartItems");
   }
-  
 };
 </script>
 

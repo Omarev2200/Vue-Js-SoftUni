@@ -88,13 +88,8 @@
                 <div
                   class="alert alert-danger"
                   role="alert"
-                  v-else-if="!$v.phoneNumber.minLength"
-                >Phone Number must have at least 9 letters.</div>
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  v-else-if="!$v.phoneNumber.numeric"
-                >Phone Number should only have numbers</div>
+                  v-else-if="!$v.phoneNumber.telNumber"
+                >Phone is invalid!</div>
               </template>
 
               <br />
@@ -110,7 +105,6 @@
                   <div class="spinner-border text-wait"></div>
                 </div>
               </button>
-              
             </form>
           </div>
         </div>
@@ -121,7 +115,9 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minLength, alpha, numeric } from "vuelidate/lib/validators";
+import { required, minLength, alpha } from "vuelidate/lib/validators";
+import { helpers } from "vuelidate/lib/validators";
+const telNumber = helpers.regex("phonenumber", /^[0-9]{9}$/);
 export default {
   mixins: [validationMixin],
   name: "ShoppingForm",
@@ -145,8 +141,7 @@ export default {
       required
     },
     phoneNumber: {
-      minLength: minLength(9),
-      numeric,
+      telNumber,
       required
     }
   },
@@ -156,7 +151,7 @@ export default {
     },
 
     loading() {
-      return this.$store.getters.loading;
+      return this.$store.getters.loadingSpiner;
     }
   },
   methods: {
@@ -167,12 +162,10 @@ export default {
         phoneNumber: this.phoneNumber,
         order: this.order
       });
-      
-     this.$store.dispatch("clearCart")
-    
+
+      this.$store.dispatch("clearCart");
     }
-  },
- 
+  }
 };
 </script>
 

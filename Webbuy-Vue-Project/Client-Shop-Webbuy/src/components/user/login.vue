@@ -24,16 +24,12 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.email.required"
-                >
-                  Email is required!
-                </div>
+                >Email is required!</div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-else-if="!$v.email.email"
-                >
-                  Invalid email!
-                </div>
+                >Invalid email!</div>
               </template>
 
               <label for="inputPassword">Password</label>
@@ -56,16 +52,12 @@
                   class="alert alert-danger"
                   role="alert"
                   v-if="!$v.password.required"
-                >
-                  Password is required!
-                </div>
+                >Password is required!</div>
                 <div
                   class="alert alert-danger"
                   role="alert"
                   v-else-if="!$v.password.minLength"
-                >
-                  Password should be longer than 6 symbols!
-                </div>
+                >Password should be longer than 6 symbols!</div>
               </template>
 
               <br />
@@ -84,7 +76,6 @@
               <div>
                 <p>
                   Don't have an account?
-
                   <router-link to="/register">Register</router-link>
                 </p>
               </div>
@@ -105,18 +96,18 @@ export default {
   data() {
     return {
       email: "",
-      password: "",
+      password: ""
     };
   },
   validations: {
     email: {
       required,
-      email,
+      email
     },
     password: {
       required,
-      minLength: minLength(6),
-    },
+      minLength: minLength(6)
+    }
   },
 
   computed: {
@@ -126,7 +117,7 @@ export default {
 
     loading() {
       return this.$store.getters.loading;
-    },
+    }
   },
 
   watch: {
@@ -134,17 +125,17 @@ export default {
       if (value !== null && value !== undefined) {
         this.$router.push("/");
       }
-    },
+    }
   },
 
   methods: {
     login() {
       this.$store.dispatch("loginUser", {
         email: this.email,
-        password: this.password,
+        password: this.password
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

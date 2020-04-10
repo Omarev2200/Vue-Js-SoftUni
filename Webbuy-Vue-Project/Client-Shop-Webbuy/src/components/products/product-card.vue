@@ -20,12 +20,8 @@
           class="btn btn-primary"
           v-if="!inCart"
           @click="addToCart()"
-        >
-          ADD TO CART
-        </button>
-        <button type="button" class="btn btn-warning" v-if="inCart">
-          Product is in the cart
-        </button>
+        >ADD TO CART</button>
+        <button type="button" class="btn btn-warning" v-if="inCart">Product is in the cart</button>
       </div>
     </div>
   </div>
@@ -35,7 +31,7 @@
 export default {
   data() {
     return {
-      id: [],
+      id: []
     };
   },
   name: "ProductCard",
@@ -45,7 +41,7 @@ export default {
     imigUrl: String,
     price: Number,
     size: String,
-    gender: String,
+    gender: String
   },
   computed: {
     auth() {
@@ -63,7 +59,7 @@ export default {
       }
 
       return exists;
-    },
+    }
   },
   methods: {
     addToCart() {
@@ -80,10 +76,10 @@ export default {
         price: this.price,
         size: this.size,
         gender: this.gender,
-        quantity: 1,
+        quantity: 1
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -96,5 +92,6 @@ export default {
 .card-img-top {
   width: 252px;
   height: 220px;
-}</style
+}
+</style
 >>

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="user === null">
-      Loding...
-    </div>
+    <div v-if="user === null">Loding...</div>
     <div v-else class="card">
       <h2 style="text-align:center">USER PROFILE</h2>
       <img
@@ -14,9 +12,7 @@
       <p class="title">CEO & Founder, Example</p>
       <p>Harvard University</p>
       <p>
-        <button class="btn btn-danger" @click.prevent="deleteUser">
-          Delete
-        </button>
+        <button class="btn btn-danger" @click.prevent="deleteUser">Delete</button>
       </p>
     </div>
   </div>
@@ -26,13 +22,13 @@ export default {
   computed: {
     user() {
       return this.$store.getters.user;
-    },
+    }
   },
   methods: {
     deleteUser() {
       this.$store.dispatch("deleteUser", this.user._id);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
