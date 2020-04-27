@@ -54,20 +54,13 @@ export default {
           });
           router.push("/login");
           commit("setLoading", false);
-          //  const newUser = {
-          //   id: data._id,
-          //   role: data.roles,
-          //   email: data.email,
-          //   posts: data.posts
-          // };
-          // commit("setUser", newUser);
         })
         .catch((error) => {
           Vue.notify({
             group: "auth",
             type: "error",
-            title: "Warnig",
-            text: error,
+            title: "Email exsist",
+            text:  'Warnig' ,
           });
           commit("setLoading", false);
           commit("setError", error);
@@ -115,7 +108,7 @@ export default {
     logout({ commit, dispatch }) {
       axios.post(`user/logout`).then(() => {
         localStorage.removeItem("user-token");
-        dispatch("clearCart");
+        dispatch("clearCartAtLogout");
         router.push("/login");
         Vue.notify({
           group: "auth",

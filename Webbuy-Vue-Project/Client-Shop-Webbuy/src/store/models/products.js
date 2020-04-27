@@ -190,6 +190,12 @@ const actions = {
       commit("deliteOrder", id);
     });
   },
+  clearCartAtLogout({ commit }) {
+    axios.delete("cart").then(() => {
+      commit("clearCartOrders", []);
+      router.push("/register");
+    });
+  },
 };
 
 // mutations
